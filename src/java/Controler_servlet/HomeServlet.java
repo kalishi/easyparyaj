@@ -58,7 +58,7 @@ public class HomeServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-            request.getRequestDispatcher("/Web\\ Pages/index.jsp").forward(request, response);
+//            request.getRequestDispatcher("/Web\\ Pages/index.jsp").forward(request, response);
     }
 
     /**
