@@ -1,6 +1,6 @@
 -- Creation de la base
-create database Easy_Pariage;
-use Easy_Pariage;
+create database easy_paryaj;
+use easy_paryaj;
 
 create table Compte(
  code_C int PRIMARY KEY auto_increment,

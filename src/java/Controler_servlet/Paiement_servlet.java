@@ -11,6 +11,7 @@ import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author abdue
  */
+@WebServlet(name = "Paiement_servlet", urlPatterns = {"/admin/paiement/"})
 public class Paiement_servlet extends HttpServlet {
 
     /**
@@ -45,7 +47,19 @@ public class Paiement_servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         lister(request, response);
+         PaiementDao dao=new PaiementDao();
+//        HttpSession session = request.getSession();
+        try {
+            ArrayList<PaiementModel> data = dao.lister();
+            request.setAttribute("data", data);
+        } catch (ClassNotFoundException e) {
+            request.setAttribute("error", e.getStackTrace());
+        } catch (SQLException e) {
+            request.setAttribute("error", e.getStackTrace());
+        }
+        request.getRequestDispatcher("/Paiement/Paiement.jsp").forward(request, response);
+
+        
     }
 
     /**
@@ -69,20 +83,20 @@ public class Paiement_servlet extends HttpServlet {
      */
     
       // La fonction lister
-     protected void lister(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-         PaiementDao dao=new PaiementDao();
-        HttpSession session = request.getSession();
-        try {
-            ArrayList<PaiementModel> data = dao.lister();
-            session.setAttribute("data", data);
-        } catch (ClassNotFoundException ex) {
-            session.setAttribute("exceptions", ex.getMessage());
-        } catch (SQLException ex) {
-            session.setAttribute("exceptions", ex.getMessage());
-        }
-
-    }
+//     protected void lister(HttpServletRequest request, HttpServletResponse response)
+//            throws ServletException, IOException {
+//         PaiementDao dao=new PaiementDao();
+//        HttpSession session = request.getSession();
+//        try {
+//            ArrayList<PaiementModel> data = dao.lister();
+//            request.setAttribute("data", data);
+//        } catch (ClassNotFoundException e) {
+//            request.setAttribute("error", e.getStackTrace());
+//        } catch (SQLException e) {
+//            request.setAttribute("error", e.getStackTrace());
+//        }
+//
+//    }
 
     
     @Override
