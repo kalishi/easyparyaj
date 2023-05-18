@@ -61,7 +61,7 @@ public class PaiementDao implements IServices<PaiementModel>{
 }
 
     @Override
-    public int enregistrer() throws SQLException, ClassNotFoundException {
+    public int enregistrer(PaiementModel obj) throws SQLException, ClassNotFoundException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 

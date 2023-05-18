@@ -32,7 +32,7 @@ public class UserDao implements IServices<User> {
     }
 
     @Override
-    public int enregistrer() throws SQLException, ClassNotFoundException {
+    public int enregistrer(User obj) throws SQLException, ClassNotFoundException {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 //    INSERT INTO `compte` (`code_C`, `Nom`, `Prenom`, `Sexe`, `Adresse`, `Lieu_de_naissance`, `Date_de_naissance`, `Tel`, `Nif_Cin`, `Password`, `Solde`, `Etat`) VALUES (NULL, 'pp', 'pp', 'M', 'lilo', 'lopo', '2023-05-17', '8989', '9898', '$2y$10$0pzBowRwzPb/M0pxrTAZw.c3EZgUycpnLHBqkVga0fHFQo81A1OEC', '90', 'A');
