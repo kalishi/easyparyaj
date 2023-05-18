@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class UserDao implements IServices<User> {
 
-    Connection conn = null;
+    Connection conn = DBUtils.connect();
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     String req;
@@ -32,10 +32,28 @@ public class UserDao implements IServices<User> {
     }
 
     @Override
-    public int enregistrer() throws SQLException, ClassNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int enregistrer(User user) throws SQLException, ClassNotFoundException {
+         String sql = "INSERT INTO Compte (Nom, Prenom, Sexe, Adresse, Lieu_de_naissance, Date_de_naissance, " +
+                "Tel, Nif_Cin, Password, username, Solde, Etat) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        conn = DBUtils.connect();
+        pstmt = conn.prepareStatement(sql);
+        pstmt.setString(1, user.getNom());
+        pstmt.setString(2, user.getPrenom());
+        pstmt.setString(3, user.getSexe());
+        pstmt.setString(4, user.getAdresse());
+        pstmt.setString(5, user.getLieuDeNaissance());
+        pstmt.setString(6, user.getDateDeNaissance());
+        pstmt.setString(7, user.getTelephone());
+        pstmt.setString(8, user.getNifCin());
+        pstmt.setString(9, user.getPassword());
+        pstmt.setString(10, user.getUsername());
+        pstmt.setDouble(11, user.getSolde());
+        pstmt.setString(12, user.getEtat());
+        int nb = pstmt.executeUpdate();
+        
+        return nb;
     }
-//    INSERT INTO `compte` (`code_C`, `Nom`, `Prenom`, `Sexe`, `Adresse`, `Lieu_de_naissance`, `Date_de_naissance`, `Tel`, `Nif_Cin`, `Password`, `Solde`, `Etat`) VALUES (NULL, 'pp', 'pp', 'M', 'lilo', 'lopo', '2023-05-17', '8989', '9898', '$2y$10$0pzBowRwzPb/M0pxrTAZw.c3EZgUycpnLHBqkVga0fHFQo81A1OEC', '90', 'A');
 
     @Override
     public User rechercher(String id) throws SQLException, ClassNotFoundException {
@@ -69,13 +87,16 @@ public class UserDao implements IServices<User> {
                 String password = rs.getString("Password");
                 double solde = rs.getDouble("Solde");
                 String etat = rs.getString("Etat");
-                return new User(code_C, nom,
+                 user = new User( nom,
                         prenom, sexe, adresse,
                         lieu_de_naissance,
                         date_de_naissance,
                         tel, nif_Cin, username,
-                        password, solde, etat
+                        password, etat
                 );
+                 user.setCode(code_C);
+                 user.setSolde(solde);
+                 return user;
             }
 
         } catch (Exception e) {

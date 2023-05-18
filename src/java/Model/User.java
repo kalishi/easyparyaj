@@ -26,8 +26,12 @@ public class User {
     public User() {
     }
 
-    public User(String code, String nom, String prenom, String sexe, String adresse, String lieuDeNaissance, String dateDeNaissance, String telephone, String nifCin, String username, String password, double solde, String etat) {
-        this.code = code;
+    public User(String nom, String prenom, String sexe,
+            String adresse, String lieuDeNaissance, 
+            String dateDeNaissance, String telephone,
+            String nifCin, String username,
+            String password, String etat
+    ) {
         this.nom = nom;
         this.prenom = prenom;
         this.sexe = sexe;
@@ -38,7 +42,7 @@ public class User {
         this.nifCin = nifCin;
         this.username = username;
         this.password = password;
-        this.solde = solde;
+        this.solde = 0.0;
         this.etat = etat;
     }
 

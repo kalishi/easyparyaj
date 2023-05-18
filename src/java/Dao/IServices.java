@@ -16,7 +16,7 @@ import java.util.ArrayList;
       
     T rechercher(String id) throws SQLException, ClassNotFoundException;
     ArrayList<T> lister() throws SQLException, ClassNotFoundException;  
-    int enregistrer() throws SQLException, ClassNotFoundException;
+    int enregistrer(T object) throws SQLException, ClassNotFoundException;
 
 
 }
