@@ -14,7 +14,7 @@
         <h2>Signup</h2>
         <form action="signup" method="POST">
             <%
-                if (request.getAttribute("loginError") != null) {
+                if (request.getAttribute("signupError") != null) {
             %>
             <p class="error" style="color: red"><%= request.getAttribute("signupError")%></p>
 
@@ -49,11 +49,14 @@
             <label for="nifCin">NIF/CIN:</label>
             <input type="text" id="nifCin" name="nifCin" required><br><br>
 
-            <label for="username">Nom d'utilisateur:</label>
+            <label for="username">Username</label>
             <input type="text" id="username" name="username" required><br><br>
 
-            <label for="password">Mot de passe:</label>
+            <label for="password">Password</label>
             <input type="password" id="password" name="password" minlength="6" required><br><br>
+            
+            <label for="password2">Confirm Password</label>
+            <input type="password2" id="password2" name="password2" minlength="6" required><br><br>
 
             <input type="submit" value="Signup">
         </form>

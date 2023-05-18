@@ -8,6 +8,7 @@ import Dao.UserDao;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLIntegrityConstraintViolationException
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,6 +47,13 @@ public class SignupServlet extends HttpServlet {
         String nifCin = request.getParameter("nifCin");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
+        String password2 = request.getParameter("password2");
+
+        if (!password.equals(password2)) {
+            request.setAttribute("signupError", "The two password doesn't matche");
+            response.sendRedirect("signup");
+            return;
+        }
 
 //        // creating a user with those informations 
         User user = new User(nom, prenom,
@@ -65,11 +73,14 @@ public class SignupServlet extends HttpServlet {
                 // Redirect to a secure page
                 response.sendRedirect(request.getContextPath() + "/accounts/profile");
             }
-        } catch (Exception e) {
+        } catch (SQLIntegrityConstraintViolationException e) {
             e.printStackTrace();
             request.setAttribute("signupError", e);
             response.sendRedirect("signup");
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+
     }
 
     /**

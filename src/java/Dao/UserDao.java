@@ -21,7 +21,7 @@ import java.util.logging.Logger;
  */
 public class UserDao implements IServices<User> {
 
-    Connection conn = DBUtils.connect();
+    Connection conn = null;
     PreparedStatement pstmt = null;
     ResultSet rs = null;
     String req;
