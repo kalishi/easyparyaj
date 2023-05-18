@@ -30,6 +30,7 @@ public class PaiementDao implements IServices<PaiementModel>{
         Date Date_Paiement;
         Double Montant;
         String Nom;
+        String idC;
         String Prenom;
         ArrayList<PaiementModel> ar = new ArrayList<>();
         //Construction de la requette
@@ -46,13 +47,22 @@ public class PaiementDao implements IServices<PaiementModel>{
              Code_Paiement= rst.getString("Code_Paiement");
              Date_Paiement= rst.getDate("Date_Paiement");
              Montant= rst.getDouble("Montant");
-             Nom= rst.getString("Nom");
+             Nom= rst.getString("Nom");   
+//             idC= rst.getString("Id_C");
              Prenom= rst.getString("Prenom");
              PaiementModel pm= new PaiementModel(Code_Paiement,Montant,Nom,Prenom);
              pm.setDate_Paiement(Date_Paiement.toLocalDate());
+//           pm.setId_Compte(idC);
              ar.add(pm);
     }
+    
+         DBUtils.close(rst, prepar, con);
      return ar;
 }
+
+    @Override
+    public int enregistrer() throws SQLException, ClassNotFoundException {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 
 }

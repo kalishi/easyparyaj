@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author abdue
  */
-@WebServlet(name = "Paiement_servlet", urlPatterns = {"/admin/paiement/"})
+@WebServlet(name = "Paiement_servlet", urlPatterns = {"/paiement/"})
 public class Paiement_servlet extends HttpServlet {
 
     /**
@@ -33,8 +33,6 @@ public class Paiement_servlet extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-        
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -47,7 +45,7 @@ public class Paiement_servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         PaiementDao dao=new PaiementDao();
+        PaiementDao dao = new PaiementDao();
 //        HttpSession session = request.getSession();
         try {
             ArrayList<PaiementModel> data = dao.lister();
@@ -59,7 +57,6 @@ public class Paiement_servlet extends HttpServlet {
         }
         request.getRequestDispatcher("/Paiement/Paiement.jsp").forward(request, response);
 
-        
     }
 
     /**
@@ -73,7 +70,7 @@ public class Paiement_servlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+
     }
 
     /**
@@ -81,8 +78,7 @@ public class Paiement_servlet extends HttpServlet {
      *
      * @return a String containing servlet description
      */
-    
-      // La fonction lister
+    // La fonction lister
 //     protected void lister(HttpServletRequest request, HttpServletResponse response)
 //            throws ServletException, IOException {
 //         PaiementDao dao=new PaiementDao();
@@ -97,8 +93,6 @@ public class Paiement_servlet extends HttpServlet {
 //        }
 //
 //    }
-
-    
     @Override
     public String getServletInfo() {
         return "Short description";

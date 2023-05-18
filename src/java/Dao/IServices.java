@@ -14,8 +14,9 @@ import java.util.ArrayList;
 
   public interface IServices<T> {
       
-    T rechercher(String id) throws ClassNotFoundException, SQLException;
+    T rechercher(String id) throws SQLException, ClassNotFoundException;
+    ArrayList<T> lister() throws SQLException, ClassNotFoundException;  
+    int enregistrer() throws SQLException, ClassNotFoundException;
 
-    ArrayList<T> lister() throws ClassNotFoundException, SQLException;
 
 }

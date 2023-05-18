@@ -24,14 +24,15 @@
                     <th>Nom</th>
                     <th>Prenom</th>
                     <th>Date Paiement</th>
-                    <th>Montant</th>
+                    <th>Montant</th>    
+                    <th>ID Compte</th>
+
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <% 
-                       PaiementDao pdao= new PaiementDao();
-                       ArrayList<PaiementModel> pmt= pdao.lister();
+                    <%
+                       ArrayList<PaiementModel> pmt = (ArrayList<PaiementModel>) request.getAttribute("data");
                        if(!pmt.isEmpty()){
                           for(PaiementModel p: pmt){
                     %>
@@ -39,7 +40,10 @@
                     <td><%= p.getNom()%></td>
                     <td><%= p.getPrenom()%></td>
                     <td><%= p.getDate_Paiement() %></td>
-                    <td><%= p.getMontant() %></td>
+                    <td><%= p.getMontant() %></td>  
+                    
+                    <%--<td><%= p.getId_Compte()%></td> --%>
+
                     
                     <% }
                         } 
