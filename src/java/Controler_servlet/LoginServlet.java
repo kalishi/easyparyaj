@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
             // Set an attribute to indicate authentication failure
             request.setAttribute("loginError", "Invalid username or password");
             // Redirect back to the login page
-            request.getRequestDispatcher(request.getContextPath() +"/login.jsp").forward(request, response);
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
 

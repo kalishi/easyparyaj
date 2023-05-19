@@ -56,7 +56,7 @@
             <input type="password" id="password" name="password" minlength="6" required><br><br>
             
             <label for="password2">Confirm Password</label>
-            <input type="password2" id="password2" name="password2" minlength="6" required><br><br>
+            <input type="password" id="password2" name="password2" minlength="6" required><br><br>
 
             <input type="submit" value="Signup">
         </form>

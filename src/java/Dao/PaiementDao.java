@@ -62,6 +62,7 @@ public class PaiementDao implements IServices<PaiementModel>{
 
     @Override
     public int enregistrer(PaiementModel p) throws SQLException, ClassNotFoundException {
-
+        return 0;
+    }
 
 }

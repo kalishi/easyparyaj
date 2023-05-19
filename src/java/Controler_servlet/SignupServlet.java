@@ -8,7 +8,7 @@ import Dao.UserDao;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLIntegrityConstraintViolationException
+import java.sql.SQLIntegrityConstraintViolationException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -51,7 +51,8 @@ public class SignupServlet extends HttpServlet {
 
         if (!password.equals(password2)) {
             request.setAttribute("signupError", "The two password doesn't matche");
-            response.sendRedirect("signup");
+            request.getRequestDispatcher("/signup.jsp").forward(request, response);
+
             return;
         }
 
@@ -75,10 +76,14 @@ public class SignupServlet extends HttpServlet {
             }
         } catch (SQLIntegrityConstraintViolationException e) {
             e.printStackTrace();
-            request.setAttribute("signupError", e);
-            response.sendRedirect("signup");
+            request.setAttribute("signupError", "username already taken");
+            request.getRequestDispatcher("/signup.jsp").forward(request, response);
+
         } catch (Exception e) {
             e.printStackTrace();
+            request.setAttribute("signupError", e.getCause());
+            request.getRequestDispatcher("/signup.jsp").forward(request, response);
+            
         }
 
     }
