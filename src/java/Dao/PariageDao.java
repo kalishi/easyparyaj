@@ -38,6 +38,8 @@ public class PariageDao implements IServices<PariageModel>{
    
     @Override
     public int enregistrer(PariageModel obj) throws SQLException, ClassNotFoundException {
+        if(obj==null)
+            return 0;      
         //To change body of generated methods, choose Tools | Templates.
         Req= "INSERT INTO Parriage(Date_P,Score_prevu,Montan_mise,Solde_fiche,Id_C,Id_rencontre) values(?,?,?,?,?,?)";
         con = DBUtils.connect();
