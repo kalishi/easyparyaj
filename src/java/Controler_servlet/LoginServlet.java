@@ -24,7 +24,8 @@ public class LoginServlet extends HttpServlet {
             //set session attribute to indicate successful authentication
             request.getSession().setAttribute("authenticated", true);
             request.getSession().setAttribute("user", user);
-            request.getSession().setAttribute("user_id", user.getCode());
+            request.getSession().setAttribute("user_id",user.getCode());
+
             // Redirect to a secure page
             response.sendRedirect(request.getContextPath() +"/accounts/profile");
         } else {

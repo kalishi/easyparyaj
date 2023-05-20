@@ -62,7 +62,7 @@ public class Pariage_Servlet extends HttpServlet {
         pModel.setScrore_pevu(request.getParameter("score"));
         pModel.setMontant_mise(prix);
         pModel.setSolde_fiche(solde);
-        pModel.setId_C(user.getCode());
+        pModel.setId_C(request.getSession().getAttribute("user_id").toString());
         pModel.setId_R(request.getParameter("id_recontre"));
 
         try {
