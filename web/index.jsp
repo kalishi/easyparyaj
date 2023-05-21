@@ -16,7 +16,5 @@
         
         <a href="login">Login</a>        <a href="signup">Signup</a>     
         <a href="accounts/pariage">New pariage</a>      
-
-
     </body>
 </html>

@@ -43,6 +43,7 @@ public class Pariage_Servlet extends HttpServlet {
         request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
         try {
             lister(request,response);
+            listerGain(request, response);
         } catch (SQLException ex) {
             Logger.getLogger(Pariage_Servlet.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ClassNotFoundException ex) {
@@ -106,6 +107,20 @@ public class Pariage_Servlet extends HttpServlet {
         }
         request.getRequestDispatcher("/Pariage/Afficher_Pariage.jsp").forward(request, response);
        }
+       
+       
+        protected void listerGain(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, IOException, ServletException{
+           try {
+            ArrayList<PariageModel> data=pDao.listerGain();
+            request.setAttribute("data", data);
+        } catch (ClassNotFoundException e) {
+            request.setAttribute("error", e.getStackTrace());
+        } catch (SQLException e) {
+            request.setAttribute("error", e.getStackTrace());
+        }
+        request.getRequestDispatcher("/Pariage/ListeGain.jsp").forward(request, response);
+       }
+       
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -41,7 +41,7 @@ public class PariageDao implements IServices<PariageModel>{
         String Nom;
         String Prenom;
         
-        Req= "Select Parriage.Date_P, Parriage.Score_prevu, Parriage.Montant.mise, Parriage.Solde_fiche, Compte.Nom, Compte.Prenom FROM Parriage inner join Compte on Parriage.Code_P=Compte.code_C";
+        Req= "Select Parriage.Date_P, Parriage.Score_prevu, Parriage.Montant_mise, Parriage.Solde_fiche, Compte.Nom, Compte.Prenom FROM Parriage inner join Compte on Parriage.Code_P=Compte.code_C";
         con= DBUtils.connect();
         prepar=con.prepareStatement(Req);
         rst=prepar.executeQuery();
@@ -50,7 +50,7 @@ public class PariageDao implements IServices<PariageModel>{
         while(rst.next()){
             date_parriage=rst.getDate("Date_P");
             score_prevu=rst.getString("Score_prevu");
-            montant=rst.getDouble("Montant.mise");
+            montant=rst.getDouble("Montant_mise");
             solde_fiche=rst.getDouble("Solde_fiche");
             Nom=rst.getString("Nom");
             Prenom=rst.getString("Prenom");
@@ -83,4 +83,37 @@ public class PariageDao implements IServices<PariageModel>{
         return n;
     }
      
+    
+    public ArrayList<PariageModel> listerGain() throws SQLException, ClassNotFoundException{
+        Req="Select Select Parriage.Date_P, Parriage.Score_prevu,"
+                + " Parriage.Montant_mise, Parriage.Solde_fiche, Compte.Nom, "
+                + "Compte.Prenom FROM Compte inner join Pariage on Compte.code_C=Pariage.Code_P inner join "
+                + "rencontre on Pariage.Id_rencontre=rencontre.Code_rencontre where Score_prevu==Score_final";
+        
+        Date date_parriage;
+        String score_prevu;
+        Double montant;
+        Double solde_fiche;
+        String Nom;
+        String Prenom;
+        
+        con= DBUtils.connect();
+        prepar=con.prepareStatement(Req);
+        rst=prepar.executeQuery();
+        
+        ArrayList<PariageModel> arModel= new ArrayList<>();
+        while(rst.next()){
+            date_parriage=rst.getDate("Date_P");
+            score_prevu=rst.getString("Score_prevu");
+            montant=rst.getDouble("Montant_mise");
+            solde_fiche=rst.getDouble("Solde_fiche");
+            Nom=rst.getString("Nom");
+            Prenom=rst.getString("Prenom");
+            
+            PariageModel prg= new PariageModel(date_parriage.toLocalDate(), score_prevu, montant, solde_fiche,Nom,Prenom);
+            arModel.add(prg);
+        }
+         DBUtils.close(rst, prepar, con);
+         return arModel;
+    }
 }
