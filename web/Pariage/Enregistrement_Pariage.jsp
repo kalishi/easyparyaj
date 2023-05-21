@@ -25,6 +25,12 @@
                     
                 <%   
                 }
+                 if ( request.getAttribute("msg") !=null){
+                %>
+                <p class="success" style="color: green"><%= request.getAttribute("msg")%></p>
+                    
+                <%   
+                }
             %>
             <label>Score Prevu</label>
             <input type="text" name="score" placeholder="score" required><br>

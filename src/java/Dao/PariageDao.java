@@ -60,7 +60,7 @@ public class PariageDao implements IServices<PariageModel> {
 
 //            Nom = rst.getString("Nom");
 //            Prenom = rst.getString("Prenom");
-            PariageModel prg = new PariageModel(date_parriage, score_prevu, montantMise, solde_fiche);
+            PariageModel prg = new PariageModel(date_parriage, score_prevu, montantMise, idR, idC);
             prg.setCode_Pariage(code);
             arModel.add(prg);
         }
@@ -119,7 +119,7 @@ public class PariageDao implements IServices<PariageModel> {
 
 //            Nom = rst.getString("Nom");
 //            Prenom = rst.getString("Prenom");
-            PariageModel prg = new PariageModel(date_parriage, score_prevu, montantMise, solde_fiche);
+            PariageModel prg = new PariageModel(date_parriage, score_prevu, montantMise, idR, idC);
             prg.setCode_Pariage(code);
             arModel.add(prg);
         }
