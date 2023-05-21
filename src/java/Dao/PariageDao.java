@@ -94,7 +94,7 @@ public class PariageDao implements IServices<PariageModel> {
 //                + " Parriage.Montant_mise, Parriage.Solde_fiche, Compte.Nom, "
 //                + "Compte.Prenom FROM Compte inner join Pariage on Compte.code_C=Pariage.Code_P inner join "
 //                + "rencontre on Pariage.Id_rencontre=rencontre.Code_rencontre where Score_prevu==Score_final";
-        Req = "Select * from pariage where Id_C=?";
+        Req = "Select * from Parriage where Id_C=?";
         Date date_parriage;
         String score_prevu;
         Double montantMise;

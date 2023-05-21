@@ -22,7 +22,7 @@ public class LoginServlet extends HttpServlet {
         User user = dao.getUser(username, password);
         if (user != null) {
             //set session attribute to indicate successful authentication
-            request.getSession().setAttribute("authenticated", true);
+            request.getSession(true).setAttribute("authenticated", true);
             request.getSession().setAttribute("user", user);
             request.getSession().setAttribute("user_id",user.getCode());
 

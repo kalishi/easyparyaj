@@ -33,9 +33,10 @@
             <tbody>
                 <tr>
                     <%
-                        User user = (User)session.getAttribute("user");
-                        PariageDao dao = new PariageDao();
-                       ArrayList<PariageModel> prm = dao.listeParieUser(user.getCode());
+                        User user = (User)request.getSession().getAttribute("user");
+                        PariageDao pdao = new PariageDao();
+                        System.out.println(user);
+                       ArrayList<PariageModel> prm = pdao.listeParieUser(user.getCode());
                        if(prm != null && !prm.isEmpty()){
                           for(PariageModel p: prm){
                     %>
