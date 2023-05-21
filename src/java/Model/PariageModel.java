@@ -4,8 +4,12 @@
  */
 package Model;
 
+import Dao.MatcheDao;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -94,12 +98,23 @@ public class PariageModel {
     }
     
 
+   
+
+     public double getCoteMatch(){
+        try {
+            Matche m = new MatcheDao().rechercher(this.Id_R);
+            return m.getCote();
+        } catch (SQLException ex) {
+            Logger.getLogger(PariageModel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(PariageModel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return 0;
+     }
+     
     public double getSolde_fiche() {
-//        double solde = this.Montant_mise*cote
-        return 900;
+       return getCoteMatch()*Montant_mise;
     }
-
-
 //    public void setNom(String Nom) {
 //        this.Nom = Nom;
 //    }

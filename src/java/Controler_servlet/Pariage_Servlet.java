@@ -102,7 +102,13 @@ public class Pariage_Servlet extends HttpServlet {
             request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
             return;
         }
-
+        if(user.getSolde()<montantMise){
+            request.setAttribute("pariageError", "Solde insuffisant");
+            request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+            return;
+        }
+        
+        
         PariageModel p = new PariageModel(Date.valueOf(LocalDate.now()), scorePrevu, montantMise, idRencontre, user.getCode());
 
         try {

@@ -26,9 +26,28 @@ public class MatcheDao implements IServices<Matche> {
     String req = null;
 
     @Override
-    public Matche rechercher(String id) throws SQLException, ClassNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-
+    public Matche rechercher(String id_to_search) throws SQLException, ClassNotFoundException {
+       con = DBUtils.connect();
+        req = "Select * from rencontre where Code_rencontre="+id_to_search;
+        prepar = con.prepareStatement(req);
+        rst = prepar.executeQuery(req);
+        Matche matche = null;
+        if (rst.next()){
+            String id = rst.getString("Code_rencontre");
+            String type = rst.getString("Type_rencontre");
+            String pays = rst.getString("Pays");
+            String equipeR = rst.getString("Equipe_receveuse");
+            String equipeV = rst.getString("Equipe_visiteuse");
+            Date date = rst.getDate("Date_rencontre");
+            Time heure = rst.getTime("heure_rencontre");
+            float cote = rst.getFloat("Cote");
+            String scoreFinal = rst.getString("Score_final");
+            String etat = rst.getString("Etat_rencontre");
+             matche = new Matche(type, pays, date, equipeR, equipeV, heure, cote, scoreFinal, etat);
+            matche.setId(id);
+        }
+        return  matche;
+        
     }
 
     @Override
@@ -51,7 +70,6 @@ public class MatcheDao implements IServices<Matche> {
             String scoreFinal = rst.getString("Score_final");
             String etat = rst.getString("Etat_rencontre");
             Matche matche = new Matche(type, pays, date, equipeR, equipeV, heure, cote, scoreFinal, etat);
-            matche.setCote(cote);
             matche.setId(id);
             arr.add(matche);
         }

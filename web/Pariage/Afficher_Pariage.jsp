@@ -20,7 +20,9 @@
                     <th>id Rencontre</th>
                     <th>Date pariage</th>
                     <th>Score prevu</th>
-                    <th>Montant mise</th>    
+                    <th>Montant mise</th>  
+                    <th>cote fiche</th>    
+  
                     <th>Solde fiche</th>
                 </tr>
             </thead>
@@ -39,7 +41,8 @@
                     <td><%= p.getId_R()%></td>
                     <td><%= p.getDate_Pariage()%></td>
                     <td><%= p.getScrore_pevu()%></td>
-                    <td><%= p.getMontant_mise()%></td>  
+                    <td><%= p.getMontant_mise()%></td>      
+                    <td><%= p.getCoteMatch()%></td>  
                     <td><%= p.getSolde_fiche()%></td>    
                     </tr>                
                     <% }
