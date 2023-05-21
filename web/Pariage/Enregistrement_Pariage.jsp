@@ -4,6 +4,8 @@
     Author     : abdue
 --%>
 
+<%@page import="Model.User"%>
+<%@page import="Dao.MatcheDao"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Model.Matche"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -25,25 +27,27 @@
                 }
             %>
             <label>Score Prevu</label>
-            <input type="text" name="score" placeholder="score"><br>
+            <input type="text" name="score" placeholder="score" required><br>
              <label>Montant Mise</label>
-             <input type="number" name="montant" placeholder="montant"><br>
+             <input type="number" name="montant" placeholder="montant" min="10" required><br>
              <label>Solde Fiche</label>
              <input type="number" name="solde" placeholder="solde" disabled="true"><br>
             <label>Choisir la rencontre</label>
-             <select id="id_renconre" name="id_renconre">
-            <option value="1">real Madrid vs Manchester City></option>
-             <%--
-             RencontreDao dao = new RencontreDao();
-                 ArrayList<Rencontre> arr = new ArrayList(doa.liste()));
-                 for (Rencontre r:arr){
+            <select id="id_rencontre" name="id_rencontre" required>
+             <%
+             MatcheDao dao = new MatcheDao();
+                 ArrayList<Matche> arr = (ArrayList<Matche>)request.getAttribute("matches");
+                 for (Matche m:arr){
                  %>
-                    <option value="<%=r.code %>"><%=r.equipeVisiteuse%> vs <%=r.equipeReceveuse%></option>
+                    <option value="<%=m.getId() %>"><%=m.getEquipeV()%> vs <%=m.getEquipeR()%></option>
                 <%
                  }
-            --%>
+            %>
              </select>
              <input type="submit" class="btn btn-primary" value="Enregistrer">
         </form>
+             
+            <%@include file="Afficher_Pariage.jsp" %>
+             
     </body>
 </html>

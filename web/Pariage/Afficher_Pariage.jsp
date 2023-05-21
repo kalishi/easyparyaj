@@ -15,13 +15,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Les Pariages</h1>
+        <h1>Mes Pariaes</h1>
         
          <table border="3" cellspacing="3" cellpadding="3">
             <thead>
                 <tr>
-                    <th>Nom</th>
-                    <th>Prenom</th>
+                    <th>id</th>
+                    <th>id Rencontre</th>
                     <th>Date pariage</th>
                     <th>Score prevu</th>
                     <th>Montant mise</th>    
@@ -31,17 +31,16 @@
             <tbody>
                 <tr>
                     <%
-                       ArrayList<PariageModel> prm = (ArrayList<PariageModel>) request.getAttribute("data");
+                       ArrayList<PariageModel> prm = (ArrayList<PariageModel>)request.getAttribute("userPariages");
                        if(prm != null && !prm.isEmpty()){
                           for(PariageModel p: prm){
                     %>
-                    <td><%= p.getNom()%></td>
-                    <td><%= p.getPrenom()%></td>
+                    <td><%= p.getCode_Pariage()%></td>
+                    <td><%= p.getId_R()%></td>
                     <td><%= p.getDate_Pariage()%></td>
                     <td><%= p.getScrore_pevu()%></td>
                     <td><%= p.getMontant_mise()%></td>  
-                    <td><%= p.getSolde_fiche()%></td>  
-                    
+                    <td><%= p.getSolde_fiche()%></td>
                     <%--<td><%= p.getId_Compte()%></td> --%>
 
                     

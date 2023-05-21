@@ -20,12 +20,13 @@ import java.util.ArrayList;
  *
  * @author abdue
  */
-public class PariageDao implements IServices<PariageModel>{
-     Connection con=null;
-     PreparedStatement prepar=null;
-     ResultSet rst= null;
-     String Req= "";
-     
+public class PariageDao implements IServices<PariageModel> {
+
+    Connection con = null;
+    PreparedStatement prepar = null;
+    ResultSet rst = null;
+    String Req = "";
+
     @Override
     public PariageModel rechercher(String id) throws SQLException, ClassNotFoundException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -36,39 +37,44 @@ public class PariageDao implements IServices<PariageModel>{
         //To change body of generated methods, choose Tools | Templates.
         Date date_parriage;
         String score_prevu;
-        Double montant;
+        Double montantMise;
         Double solde_fiche;
         String Nom;
         String Prenom;
-        
-        Req= "Select Parriage.Date_P, Parriage.Score_prevu, Parriage.Montant_mise, Parriage.Solde_fiche, Compte.Nom, Compte.Prenom FROM Parriage inner join Compte on Parriage.Code_P=Compte.code_C";
-        con= DBUtils.connect();
-        prepar=con.prepareStatement(Req);
-        rst=prepar.executeQuery();
-        
-        ArrayList<PariageModel> arModel= new ArrayList<>();
-        while(rst.next()){
-            date_parriage=rst.getDate("Date_P");
-            score_prevu=rst.getString("Score_prevu");
-            montant=rst.getDouble("Montant_mise");
-            solde_fiche=rst.getDouble("Solde_fiche");
-            Nom=rst.getString("Nom");
-            Prenom=rst.getString("Prenom");
-            
-            PariageModel prg= new PariageModel(date_parriage.toLocalDate(), score_prevu, montant, solde_fiche,Nom,Prenom);
+
+//        Req = "Select Parriage.Date_P, Parriage.Score_prevu, Parriage.Montant_mise, Parriage.Solde_fiche, Compte.Nom, Compte.Prenom FROM Parriage inner join Compte on Parriage.Code_P=Compte.code_C";
+        Req = "Select *from Pariage";
+        con = DBUtils.connect();
+        prepar = con.prepareStatement(Req);
+        rst = prepar.executeQuery();
+
+        ArrayList<PariageModel> arModel = new ArrayList<>();
+        while (rst.next()) {
+            date_parriage = rst.getDate("Date_P");
+            score_prevu = rst.getString("Score_prevu");
+            montantMise = rst.getDouble("Montant_mise");
+            solde_fiche = rst.getDouble("Solde_fiche");
+            String code = rst.getString("Code_P");
+            String idC = rst.getString("id_C");
+            String idR = rst.getString("Id_rencontre");
+
+//            Nom = rst.getString("Nom");
+//            Prenom = rst.getString("Prenom");
+            PariageModel prg = new PariageModel(date_parriage, score_prevu, montantMise, solde_fiche);
+            prg.setCode_Pariage(code);
             arModel.add(prg);
         }
-         DBUtils.close(rst, prepar, con);
-         return arModel;
+        DBUtils.close(rst, prepar, con);
+        return arModel;
     }
 
-   
     @Override
     public int enregistrer(PariageModel obj) throws SQLException, ClassNotFoundException {
-        if(obj==null)
-            return 0;      
+        if (obj == null) {
+            return 0;
+        }
         //To change body of generated methods, choose Tools | Templates.
-        Req= "INSERT INTO Parriage(Date_P,Score_prevu,Montan_mise,Solde_fiche,Id_C,Id_rencontre) values(?,?,?,?,?,?)";
+        Req = "INSERT INTO Parriage(Date_P,Score_prevu,Montan_mise,Solde_fiche,Id_C,Id_rencontre) values(?,?,?,?,?,?)";
         con = DBUtils.connect();
         prepar = con.prepareStatement(Req);
         prepar.setString(1, LocalDate.now().toString());
@@ -77,43 +83,47 @@ public class PariageDao implements IServices<PariageModel>{
         prepar.setDouble(4, obj.getSolde_fiche());
         prepar.setString(5, obj.getId_C());
         prepar.setString(6, obj.getId_R());
-        
-        int n= prepar.executeUpdate();
-       DBUtils.close(rst, prepar, con);
+
+        int n = prepar.executeUpdate();
+        DBUtils.close(rst, prepar, con);
         return n;
     }
-     
-    
-    public ArrayList<PariageModel> listerGain() throws SQLException, ClassNotFoundException{
-        Req="Select Select Parriage.Date_P, Parriage.Score_prevu,"
-                + " Parriage.Montant_mise, Parriage.Solde_fiche, Compte.Nom, "
-                + "Compte.Prenom FROM Compte inner join Pariage on Compte.code_C=Pariage.Code_P inner join "
-                + "rencontre on Pariage.Id_rencontre=rencontre.Code_rencontre where Score_prevu==Score_final";
-        
+
+    public ArrayList<PariageModel> listeParieUser(String id) throws SQLException, ClassNotFoundException {
+//        Req="Select Select Parriage.Date_P, Parriage.Score_prevu,"
+//                + " Parriage.Montant_mise, Parriage.Solde_fiche, Compte.Nom, "
+//                + "Compte.Prenom FROM Compte inner join Pariage on Compte.code_C=Pariage.Code_P inner join "
+//                + "rencontre on Pariage.Id_rencontre=rencontre.Code_rencontre where Score_prevu==Score_final";
+        Req = "Select * from pariage where Id_C=?";
         Date date_parriage;
         String score_prevu;
-        Double montant;
+        Double montantMise;
         Double solde_fiche;
-        String Nom;
-        String Prenom;
-        
-        con= DBUtils.connect();
-        prepar=con.prepareStatement(Req);
-        rst=prepar.executeQuery();
-        
-        ArrayList<PariageModel> arModel= new ArrayList<>();
-        while(rst.next()){
-            date_parriage=rst.getDate("Date_P");
-            score_prevu=rst.getString("Score_prevu");
-            montant=rst.getDouble("Montant_mise");
-            solde_fiche=rst.getDouble("Solde_fiche");
-            Nom=rst.getString("Nom");
-            Prenom=rst.getString("Prenom");
-            
-            PariageModel prg= new PariageModel(date_parriage.toLocalDate(), score_prevu, montant, solde_fiche,Nom,Prenom);
+//        String Nom;
+//        String Prenom;
+
+        con = DBUtils.connect();
+        prepar = con.prepareStatement(Req);
+        prepar.setString(1, id);
+        rst = prepar.executeQuery();
+
+        ArrayList<PariageModel> arModel = new ArrayList<>();
+        while (rst.next()) {
+            date_parriage = rst.getDate("Date_P");
+            score_prevu = rst.getString("Score_prevu");
+            montantMise = rst.getDouble("Montant_mise");
+            solde_fiche = rst.getDouble("Solde_fiche");
+            String code = rst.getString("Code_P");
+            String idC = rst.getString("id_C");
+            String idR = rst.getString("Id_rencontre");
+
+//            Nom = rst.getString("Nom");
+//            Prenom = rst.getString("Prenom");
+            PariageModel prg = new PariageModel(date_parriage, score_prevu, montantMise, solde_fiche);
+            prg.setCode_Pariage(code);
             arModel.add(prg);
         }
-         DBUtils.close(rst, prepar, con);
-         return arModel;
+        DBUtils.close(rst, prepar, con);
+        return arModel;
     }
 }

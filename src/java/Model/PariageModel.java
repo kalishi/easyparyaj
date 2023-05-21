@@ -4,6 +4,7 @@
  */
 package Model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 
 /**
@@ -12,32 +13,34 @@ import java.time.LocalDate;
  */
 public class PariageModel {
     private String Code_Pariage;
-    private LocalDate Date_Pariage;
+    private Date Date_Pariage;
     private String Scrore_pevu;
     private Double Montant_mise;
     private Double Solde_fiche;
     private String Id_C;
     private String Id_R;
-    private String Nom;
-    private String Prenom;
+//    private String Nom;
+//    private String Prenom;
 
     public PariageModel() {
     }
 
-    public PariageModel(LocalDate Date_Pariage, String Scrore_pevu, Double Montant_mise, Double Solde_fiche, String Nom, String Prenom) {
+    public PariageModel(Date Date_Pariage, String Scrore_pevu, Double Montant_mise, String Id_R,String Id_C ) {
         this.Date_Pariage = Date_Pariage;
         this.Scrore_pevu = Scrore_pevu;
         this.Montant_mise = Montant_mise;
-        this.Solde_fiche = Solde_fiche;
-        this.Nom = Nom;
-        this.Prenom = Prenom;
+        this.Id_R = Id_R;   
+        this.Id_C = Id_C;
+
+//        this.Nom = Nom;
+//        this.Prenom = Prenom;
     }
 
     public String getCode_Pariage() {
         return Code_Pariage;
     }
 
-    public LocalDate getDate_Pariage() {
+    public Date getDate_Pariage() {
         return Date_Pariage;
     }
 
@@ -49,10 +52,6 @@ public class PariageModel {
         return Montant_mise;
     }
 
-    public Double getSolde_fiche() {
-        return Solde_fiche;
-    }
-
     public String getId_C() {
         return Id_C;
     }
@@ -61,19 +60,19 @@ public class PariageModel {
         return Id_R;
     }
 
-    public String getNom() {
-        return Nom;
-    }
-
-    public String getPrenom() {
-        return Prenom;
-    }
+//    public String getNom() {
+//        return Nom;
+//    }
+//
+//    public String getPrenom() {
+//        return Prenom;
+//    }
 
     public void setCode_Pariage(String Code_Pariage) {
         this.Code_Pariage = Code_Pariage;
     }
 
-    public void setDate_Pariage(LocalDate Date_Pariage) {
+    public void setDate_Pariage(Date Date_Pariage) {
         this.Date_Pariage = Date_Pariage;
     }
 
@@ -85,9 +84,6 @@ public class PariageModel {
         this.Montant_mise = Montant_mise;
     }
 
-    public void setSolde_fiche(Double Solde_fiche) {
-        this.Solde_fiche = Solde_fiche;
-    }
 
     public void setId_C(String Id_C) {
         this.Id_C = Id_C;
@@ -96,19 +92,22 @@ public class PariageModel {
     public void setId_R(String Id_R) {
         this.Id_R = Id_R;
     }
+    
 
-    public void setNom(String Nom) {
-        this.Nom = Nom;
+    public double getSolde_fiche() {
+        return Solde_fiche;
     }
 
-    public void setPrenom(String Prenom) {
-        this.Prenom = Prenom;
-    }
 
-    @Override
-    public String toString() {
-        return "PariageModel{" + "Code_Pariage=" + Code_Pariage + ", Date_Pariage=" + Date_Pariage + ", Scrore_pevu=" + Scrore_pevu + ", Montant_mise=" + Montant_mise + ", Solde_fiche=" + Solde_fiche + ", Id_C=" + Id_C + ", Id_R=" + Id_R + ", Nom=" + Nom + ", Prenom=" + Prenom + '}';
-    }
+//    public void setNom(String Nom) {
+//        this.Nom = Nom;
+//    }
+//
+//    public void setPrenom(String Prenom) {
+//        this.Prenom = Prenom;
+//    }
+
+    
     
    
 
