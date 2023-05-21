@@ -18,18 +18,19 @@ public class PariageModel {
     private Double Solde_fiche;
     private String Id_C;
     private String Id_R;
+    private String Nom;
+    private String Prenom;
 
     public PariageModel() {
     }
 
-    public PariageModel(String Code_Pariage, LocalDate Date_Pariage, String Scrore_pevu, Double Montant_mise, Double Solde_fiche, String Id_C, String Id_R) {
-        this.Code_Pariage = Code_Pariage;
+    public PariageModel(LocalDate Date_Pariage, String Scrore_pevu, Double Montant_mise, Double Solde_fiche, String Nom, String Prenom) {
         this.Date_Pariage = Date_Pariage;
         this.Scrore_pevu = Scrore_pevu;
         this.Montant_mise = Montant_mise;
         this.Solde_fiche = Solde_fiche;
-        this.Id_C = Id_C;
-        this.Id_R = Id_R;
+        this.Nom = Nom;
+        this.Prenom = Prenom;
     }
 
     public String getCode_Pariage() {
@@ -60,6 +61,14 @@ public class PariageModel {
         return Id_R;
     }
 
+    public String getNom() {
+        return Nom;
+    }
+
+    public String getPrenom() {
+        return Prenom;
+    }
+
     public void setCode_Pariage(String Code_Pariage) {
         this.Code_Pariage = Code_Pariage;
     }
@@ -88,9 +97,19 @@ public class PariageModel {
         this.Id_R = Id_R;
     }
 
+    public void setNom(String Nom) {
+        this.Nom = Nom;
+    }
+
+    public void setPrenom(String Prenom) {
+        this.Prenom = Prenom;
+    }
+
     @Override
     public String toString() {
-        return "PariageModel{" + "Code_Pariage=" + Code_Pariage + ", Date_Pariage=" + Date_Pariage + ", Scrore_pevu=" + Scrore_pevu + ", Montant_mise=" + Montant_mise + ", Solde_fiche=" + Solde_fiche + ", Id_C=" + Id_C + ", Id_R=" + Id_R + '}';
+        return "PariageModel{" + "Code_Pariage=" + Code_Pariage + ", Date_Pariage=" + Date_Pariage + ", Scrore_pevu=" + Scrore_pevu + ", Montant_mise=" + Montant_mise + ", Solde_fiche=" + Solde_fiche + ", Id_C=" + Id_C + ", Id_R=" + Id_R + ", Nom=" + Nom + ", Prenom=" + Prenom + '}';
     }
     
+   
+
 }

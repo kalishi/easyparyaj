@@ -10,6 +10,9 @@ import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,7 +41,13 @@ public class Pariage_Servlet extends HttpServlet {
             return;
         }
         request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
-
+        try {
+            lister(request,response);
+        } catch (SQLException ex) {
+            Logger.getLogger(Pariage_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Pariage_Servlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -63,7 +72,7 @@ public class Pariage_Servlet extends HttpServlet {
         pModel.setMontant_mise(prix);
         pModel.setSolde_fiche(solde);
         pModel.setId_C(request.getSession().getAttribute("user_id").toString());
-        pModel.setId_R(request.getParameter("id_recontre"));
+        pModel.setId_R("1");
 
         try {
             pDao.enregistrer(pModel);
@@ -85,6 +94,18 @@ public class Pariage_Servlet extends HttpServlet {
      *
      * @return a String containing servlet description
      */
+      //La fonction lister()
+       protected void lister(HttpServletRequest request, HttpServletResponse response) throws SQLException, ClassNotFoundException, IOException, ServletException{
+           try {
+            ArrayList<PariageModel> data=pDao.lister();
+            request.setAttribute("data", data);
+        } catch (ClassNotFoundException e) {
+            request.setAttribute("error", e.getStackTrace());
+        } catch (SQLException e) {
+            request.setAttribute("error", e.getStackTrace());
+        }
+        request.getRequestDispatcher("/Pariage/Afficher_Pariage.jsp").forward(request, response);
+       }
     @Override
     public String getServletInfo() {
         return "Short description";
