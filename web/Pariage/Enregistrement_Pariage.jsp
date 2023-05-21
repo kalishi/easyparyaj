@@ -42,7 +42,7 @@
             <select id="id_rencontre" name="id_rencontre" required>
              <%
              MatcheDao dao = new MatcheDao();
-                 ArrayList<Matche> arr = (ArrayList<Matche>)request.getAttribute("matches");
+                 ArrayList<Matche> arr = dao.lister();
                  for (Matche m:arr){
                  %>
                     <option value="<%=m.getId() %>"><%=m.getEquipeV()%> vs <%=m.getEquipeR()%></option>

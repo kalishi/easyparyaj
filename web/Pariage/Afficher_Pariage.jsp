@@ -4,6 +4,8 @@
     Author     : abdue
 --%>
 
+<%@page import="Dao.PariageDao"%>
+<%@page import="Model.User"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Model.PariageModel"%>
 <%@page import="Dao.PaiementDao"%>
@@ -31,7 +33,9 @@
             <tbody>
                 <tr>
                     <%
-                       ArrayList<PariageModel> prm = (ArrayList<PariageModel>)request.getAttribute("userPariages");
+                        User user = (User)session.getAttribute("user");
+                        PariageDao dao = new PariageDao();
+                       ArrayList<PariageModel> prm = dao.listeParieUser(user.getCode());
                        if(prm != null && !prm.isEmpty()){
                           for(PariageModel p: prm){
                     %>
