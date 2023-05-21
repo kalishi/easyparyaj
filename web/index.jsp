@@ -15,6 +15,8 @@
         <h1>Hello World! home page</h1>
         
         <a href="login">Login</a>        <a href="signup">Signup</a>     
-        <a href="accounts/pariage">New pariage</a>      
+        <a href="accounts/pariage">New pariage</a>     
+        <a href="logout">logout</a>      
+ 
     </body>
 </html>

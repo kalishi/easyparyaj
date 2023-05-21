@@ -95,7 +95,8 @@ public class PariageModel {
     
 
     public double getSolde_fiche() {
-        return Solde_fiche;
+//        double solde = this.Montant_mise*cote
+        return 900;
     }
 
 
