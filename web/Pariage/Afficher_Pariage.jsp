@@ -10,13 +10,7 @@
 <%@page import="Model.PariageModel"%>
 <%@page import="Dao.PaiementDao"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
+
         <h1>Mes Pariaes</h1>
         
          <table border="3" cellspacing="3" cellpadding="3">
@@ -31,7 +25,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                
                     <%
                         User user = (User)request.getSession().getAttribute("user");
                         PariageDao pdao = new PariageDao();
@@ -40,15 +34,14 @@
                        if(prm != null && !prm.isEmpty()){
                           for(PariageModel p: prm){
                     %>
+                    <tr>
                     <td><%= p.getCode_Pariage()%></td>
                     <td><%= p.getId_R()%></td>
                     <td><%= p.getDate_Pariage()%></td>
                     <td><%= p.getScrore_pevu()%></td>
                     <td><%= p.getMontant_mise()%></td>  
-                    <td><%= p.getSolde_fiche()%></td>
-                    <%--<td><%= p.getId_Compte()%></td> --%>
-
-                    
+                    <td><%= p.getSolde_fiche()%></td>    
+                    </tr>                
                     <% }
                         } 
                         else{
@@ -58,9 +51,6 @@
                         }
                     %>
                     
-                </tr>
+                
             </tbody>
         </table>
-
-    </body>
-</html>

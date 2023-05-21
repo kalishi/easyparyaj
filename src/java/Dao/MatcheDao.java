@@ -52,6 +52,7 @@ public class MatcheDao implements IServices<Matche> {
             String etat = rst.getString("Etat_rencontre");
             Matche matche = new Matche(type, pays, date, equipeR, equipeV, heure, cote, scoreFinal, etat);
             matche.setCote(cote);
+            matche.setId(id);
             arr.add(matche);
         }
         DBUtils.close(rst, prepar, con);

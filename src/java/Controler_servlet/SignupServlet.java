@@ -69,8 +69,10 @@ public class SignupServlet extends HttpServlet {
             UserDao dao = new UserDao();
             int nb = dao.enregistrer(user);
             if (nb > 0) {
-                request.getSession().setAttribute("authenticated", true);
-                request.getSession().setAttribute("user", user);
+                request.getSession(true).setAttribute("authenticated", true);
+                request.getSession(true).setAttribute("user", user);    
+                request.getSession(true).setAttribute("user_id", user.getCode());
+
                 // Redirect to a secure page
                 response.sendRedirect(request.getContextPath() + "/accounts/profile");
             }

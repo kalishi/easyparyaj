@@ -6,6 +6,7 @@ package Controler_servlet;
 
 import Dao.PaiementDao;
 import Model.PaiementModel;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -45,6 +46,13 @@ public class Paiement_servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");
+        User user = (User) request.getSession().getAttribute("user");
+        if (isAuthenticated == null || !isAuthenticated || user==null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+        
         PaiementDao dao = new PaiementDao();
 //        HttpSession session = request.getSession();
         try {
@@ -70,7 +78,12 @@ public class Paiement_servlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");
+        User user = (User) request.getSession().getAttribute("user");
+        if (isAuthenticated == null || !isAuthenticated || user==null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
     }
 
     /**

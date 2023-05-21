@@ -48,8 +48,8 @@ public class ProfileServlet extends HttpServlet {
         Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");   
         User user = (User) request.getSession().getAttribute("user");
 
-        if (isAuthenticated == null || !isAuthenticated ) {
-            response.sendRedirect(request.getContextPath()+"/login");
+        if (isAuthenticated == null || !isAuthenticated || user==null) {
+            response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 //        HashMap user

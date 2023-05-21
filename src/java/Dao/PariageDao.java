@@ -74,7 +74,7 @@ public class PariageDao implements IServices<PariageModel> {
             return 0;
         }
         //To change body of generated methods, choose Tools | Templates.
-        Req = "INSERT INTO Parriage(Date_P,Score_prevu,Montan_mise,Solde_fiche,Id_C,Id_rencontre) values(?,?,?,?,?,?)";
+        Req = "INSERT INTO Parriage(Date_P,Score_prevu,Montant_mise,Solde_fiche,Id_C,Id_rencontre) values(?,?,?,?,?,?)";
         con = DBUtils.connect();
         prepar = con.prepareStatement(Req);
         prepar.setString(1, LocalDate.now().toString());

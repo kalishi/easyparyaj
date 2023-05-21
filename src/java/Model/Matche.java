@@ -133,7 +133,24 @@ public class Matche {
         this.heure = heure;
     }
     
+    public static  boolean isValidScoreFormat(String score) {
+    // Vérifier si la chaîne de score est dans le format attendu (exemple avec "2-0")
+    // et ne contient pas de nombres négatifs
+    String regex = "^\\d+-\\d+$"; // Format "nombre-nombre"
+    if (!score.matches(regex)) {
+        return false;
+    }
+
+    String[] parts = score.split("-");
+    int score1 = Integer.parseInt(parts[0]);
+    int score2 = Integer.parseInt(parts[1]);
     
+    if (score1 < 0 || score2 < 0) {
+        return false;
+    }
+
+    return true;
+}
     
 
 }

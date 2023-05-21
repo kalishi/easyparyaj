@@ -39,8 +39,8 @@ public class Pariage_Servlet extends HttpServlet {
             throws ServletException, IOException {
         Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");
         User user = (User) request.getSession().getAttribute("user");
-        System.out.println(user);
-        if (isAuthenticated == null || !isAuthenticated) {
+        System.out.println(user + " " + isAuthenticated);
+        if (isAuthenticated == null || !isAuthenticated || user == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
@@ -79,15 +79,19 @@ public class Pariage_Servlet extends HttpServlet {
         Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");
         User user = (User) request.getSession().getAttribute("user");
 
-        if (isAuthenticated == null || !isAuthenticated) {
+        if (isAuthenticated == null || !isAuthenticated || user == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
-        System.out.println("post pariage");
         String scorePrevu, idRencontre;
         Double montantMise;
         try {
             scorePrevu = request.getParameter("score");
+            if (!Matche.isValidScoreFormat(scorePrevu)) {
+                request.setAttribute("pariageError", "Score invalide");
+                request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+                return;
+            }
             montantMise = Double.parseDouble(request.getParameter("montant"));
             idRencontre = request.getParameter("id_rencontre");
 
@@ -107,7 +111,7 @@ public class Pariage_Servlet extends HttpServlet {
             request.setAttribute("msg", message);
             request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
         } catch (Exception ex) {
-            request.setAttribute("pariageError", "Echeque de l'enregistrement de pariage");
+            request.setAttribute("pariageError", "Echeque de l'enregistrement de pariage" + ex.getMessage());
             request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
         }
     }

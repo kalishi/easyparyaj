@@ -32,7 +32,6 @@ public class LoginServlet extends HttpServlet {
             // Set an attribute to indicate authentication failure
             request.setAttribute("loginError", "Invalid username or password");
             // Redirect back to the login page
-            
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
     }
@@ -41,8 +40,10 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");
-        if (isAuthenticated != null && isAuthenticated) {
+        Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");     
+        User user = (User) request.getSession().getAttribute("user");
+
+        if (isAuthenticated != null && isAuthenticated && user !=null) {
             
             response.sendRedirect(request.getContextPath() + "/accounts/profile");
             return;

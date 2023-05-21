@@ -22,6 +22,7 @@ public class User {
     private String password;
     private double solde;
     private String etat;
+    private Boolean isAdmin;
 
     public User() {
     }
@@ -44,6 +45,7 @@ public class User {
         this.password = password;
         this.solde = 0.0;
         this.etat = etat;
+        this.isAdmin = false;
     }
 
     
