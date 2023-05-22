@@ -30,22 +30,29 @@ public class UserDao implements IServices<User> {
     public ArrayList<User> lister() throws SQLException, ClassNotFoundException {
         conn = DBUtils.connect();
         req = "select * from compte";
-         pstmt = conn.prepareStatement(req);
-        rs= pstmt.executeQuery();
-        
-        int code = rs.getInt("code_C");
-        String nom = rs.getString("Nom");
-        String prenom = rs.getString("Prenom");
-        String sexe = rs.getString("Sexe");
-        String adresse = rs.getString("Adresse");    
-        String nifCin = rs.getString("Nif_Cin");    
-        String tel = rs.getString("tel");
-        String username = rs.getString("username");        
-        Double  solde = rs.getDouble("solde");  
-        String etat  = rs.getString("etat");
-        String lieuNaissance = rs.getString("Lieu_de_naissance");
-        Boolean isAdmin = rs.getBoolean("isAdmin");
+        pstmt = conn.prepareStatement(req);
+        rs = pstmt.executeQuery();
+        ArrayList<User> arr = null;
+        while (rs.next()) {
+            int code = rs.getInt("code_C");
+            String nom = rs.getString("Nom");
+            String prenom = rs.getString("Prenom");
+            String sexe = rs.getString("Sexe");
+            String adresse = rs.getString("Adresse");
+            String nifCin = rs.getString("Nif_Cin");
+            String tel = rs.getString("tel");
+            String username = rs.getString("username");
+            Double solde = rs.getDouble("solde");
+            String etat = rs.getString("etat");
+            String lieuNaissance = rs.getString("Lieu_de_naissance");
+            Boolean isAdmin = rs.getBoolean("isAdmin");
+            User user = new User(nom, prenom, sexe, adresse, lieuNaissance, lieuNaissance, tel, nifCin, username, prenom, etat);
+            user.setSolde(solde);
+            arr.add(user);
 
+        }
+        DBUtils.close(rs, pstmt, conn);
+        return arr;
     }
 
     @Override
