@@ -19,12 +19,19 @@
             <label for="password">password</label>
             <input type="password" id="password" name="password" maxlength="200">
             <input type="submit" value="Connect">
-            <% 
-                if ( request.getAttribute("loginError") !=null){
-                %>
-                <p class="error" style="color: red"><%= request.getAttribute("loginError")%></p>
-                    
-                <%   
+            <%
+                if (request.getAttribute("loginError") != null) {
+            %>
+            <p class="error" style="color: red"><%= request.getAttribute("loginError")%></p>
+
+            <%
+                }
+
+                if (request.getAttribute("msg") != null) {
+            %>
+            <p class="error" style="color: red"><%= request.getAttribute("msg")%></p>
+
+            <%
                 }
             %>
         </form>

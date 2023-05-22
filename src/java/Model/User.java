@@ -153,6 +153,15 @@ public class User {
         this.etat = etat;
     }
 
+    public Boolean isAdmin(){
+        return isAdmin;
+    }
+
+    public void setIsAdmin(Boolean isAdmin) {
+        this.isAdmin = isAdmin;
+    }
+    
+    
     @Override
     public String toString() {
         return "User{" + "code=" + code + ", nom=" + nom + '}';

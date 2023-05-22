@@ -34,8 +34,8 @@ public class UserDao implements IServices<User> {
     @Override
     public int enregistrer(User user) throws SQLException, ClassNotFoundException {
          String sql = "INSERT INTO Compte (Nom, Prenom, Sexe, Adresse, Lieu_de_naissance, Date_de_naissance, " +
-                "Tel, Nif_Cin, Password, username, Solde, Etat) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "Tel, Nif_Cin, Password, username, Solde, Etat, isAdmin) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         conn = DBUtils.connect();
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, user.getNom());
@@ -49,7 +49,9 @@ public class UserDao implements IServices<User> {
         pstmt.setString(9, user.getPassword());
         pstmt.setString(10, user.getUsername());
         pstmt.setDouble(11, user.getSolde());
-        pstmt.setString(12, user.getEtat());
+        pstmt.setString(12, user.getEtat());    
+        pstmt.setBoolean(13, user.isAdmin());
+
         int nb = pstmt.executeUpdate();
         
         return nb;
@@ -87,6 +89,7 @@ public class UserDao implements IServices<User> {
                 String password = rs.getString("Password");
                 double solde = rs.getDouble("Solde");
                 String etat = rs.getString("Etat");
+                Boolean isAdmin = rs.getBoolean("isAdmin");
                  user = new User( nom,
                         prenom, sexe, adresse,
                         lieu_de_naissance,
@@ -96,6 +99,7 @@ public class UserDao implements IServices<User> {
                 );
                  user.setCode(code_C);
                  user.setSolde(solde);
+                 user.setIsAdmin(isAdmin);
                  return user;
             }
 

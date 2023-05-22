@@ -4,6 +4,7 @@
  */
 package Controler_servlet;
 
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -30,7 +31,23 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+         Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");   
+        User user = (User) request.getSession().getAttribute("user");
+
+        if (isAuthenticated == null || !isAuthenticated || user==null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+        
+        if(!user.isAdmin()){
+            request.setAttribute("msg", "please login as admin");
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
+        
+        request.setAttribute("username", user.getUsername());
+        request.getRequestDispatcher("/admin.jsp").forward(request, response);
     }
 
     /**
@@ -44,7 +61,7 @@ public class AdminServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
     }
 
     /**
