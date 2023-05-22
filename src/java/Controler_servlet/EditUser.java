@@ -8,6 +8,9 @@ import Dao.UserDao;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,11 +34,10 @@ public class EditUser extends HttpServlet {
             request.setAttribute("etat", user.getEtat());
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());
-        request.getRequestDispatcher("/editUser.jsp").forward(request, response);
+            request.getRequestDispatcher("/editUser.jsp").forward(request, response);
 
         }
         request.getRequestDispatcher("/editUser.jsp").forward(request, response);
-
 
     }
 
@@ -50,6 +52,20 @@ public class EditUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+
+        double solde = Double.parseDouble(request.getParameter("solde"));
+        String etat = request.getParameter("etat").toString();
+        String id = request.getParameter("id");
+
+        try {
+            int nb = new UserDao().update(id, solde, etat);
+        } catch (SQLException ex) {
+            request.getRequestDispatcher("/editUser.jsp").forward(request, response);
+
+        } catch (ClassNotFoundException ex) {
+            request.getRequestDispatcher("/editUser.jsp").forward(request, response);
+
+        }
 
     }
 

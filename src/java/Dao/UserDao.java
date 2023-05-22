@@ -86,10 +86,10 @@ public class UserDao implements IServices<User> {
     public User rechercher(String id) throws SQLException, ClassNotFoundException {
 
         conn = DBUtils.connect();
-        req = "select * from compte where code_C="+id;
+        req = "select * from compte where code_C=" + id;
         pstmt = conn.prepareStatement(req);
         rs = pstmt.executeQuery();
-        User user = new User() ;
+        User user = new User();
         if (rs.next()) {
             String code = rs.getString("code_C");
             String nom = rs.getString("Nom");
@@ -166,8 +166,13 @@ public class UserDao implements IServices<User> {
         return user;
     }
 
-    public int update(User u ){
-        
-        return 0;
+    public int update(String id, double solde, String etat) throws SQLException, ClassNotFoundException{
+        conn = DBUtils.connect();
+        req = "update compte set solde = ?, etat = ? where code_C = ?";
+        pstmt = conn.prepareStatement(req);
+        pstmt.setDouble(1, solde);
+        pstmt.setString(2, etat);
+        int nb = pstmt.executeUpdate();
+        return nb;
     }
 }
