@@ -32,9 +32,9 @@ public class UserDao implements IServices<User> {
         req = "select * from compte";
         pstmt = conn.prepareStatement(req);
         rs = pstmt.executeQuery();
-        ArrayList<User> arr = null;
+        ArrayList<User> arr = new ArrayList<>();
         while (rs.next()) {
-            int code = rs.getInt("code_C");
+            String code = rs.getString("code_C");
             String nom = rs.getString("Nom");
             String prenom = rs.getString("Prenom");
             String sexe = rs.getString("Sexe");
@@ -48,6 +48,7 @@ public class UserDao implements IServices<User> {
             Boolean isAdmin = rs.getBoolean("isAdmin");
             User user = new User(nom, prenom, sexe, adresse, lieuNaissance, lieuNaissance, tel, nifCin, username, prenom, etat);
             user.setSolde(solde);
+            user.setCode(code);
             arr.add(user);
 
         }
@@ -83,7 +84,31 @@ public class UserDao implements IServices<User> {
 
     @Override
     public User rechercher(String id) throws SQLException, ClassNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+
+        conn = DBUtils.connect();
+        req = "select * from compte where id="+id;
+        pstmt = conn.prepareStatement(req);
+        rs = pstmt.executeQuery();
+        User user = new User() ;
+        if (rs.next()) {
+            String code = rs.getString("code_C");
+            String nom = rs.getString("Nom");
+            String prenom = rs.getString("Prenom");
+            String sexe = rs.getString("Sexe");
+            String adresse = rs.getString("Adresse");
+            String nifCin = rs.getString("Nif_Cin");
+            String tel = rs.getString("tel");
+            String username = rs.getString("username");
+            Double solde = rs.getDouble("solde");
+            String etat = rs.getString("etat");
+            String lieuNaissance = rs.getString("Lieu_de_naissance");
+            Boolean isAdmin = rs.getBoolean("isAdmin");
+            user = new User(nom, prenom, sexe, adresse, lieuNaissance, lieuNaissance, tel, nifCin, username, prenom, etat);
+            user.setSolde(solde);
+            user.setCode(code);
+        }
+        DBUtils.close(rs, pstmt, conn);
+        return user;
     }
 
     public User getUser(String username, String password_) {

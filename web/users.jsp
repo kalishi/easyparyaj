@@ -21,7 +21,8 @@
                 <tr>
                     <th>username</th>
                     <th>Nom</th>
-                    <th>Prenom</th>
+                    <th>Prenom</th>   
+                    <th>sexe</th>
                     <th>Etat</th>
                     <th>Solde</th>  
                     <th>Admin</th>         
@@ -40,11 +41,12 @@
                     <tr>
                     <td><%= u.getUsername()%></td>
                     <td><%= u.getNom()%></td>
-                    <td><%= u.getPrenom()%></td>
+                    <td><%= u.getPrenom()%></td>   
+                    <td><%= u.getSexe()%></td>
                     <td><%= u.getEtat()%></td>
                     <td><%= u.getSolde()%></td>  
                     <td><%= u.isAdmin()%></td>       
-                    <td><a href="edit/?id=<%= u.getCode()%>"></a></td>
+                    <td><a href="/users/edit/?id=<%= u.getCode()%>">Edit</a></td>
 
 
                     

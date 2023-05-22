@@ -61,7 +61,7 @@ public class SignupServlet extends HttpServlet {
                 sexe, adresse, lieuDeNaissance,
                 dateDeNaissance, telephone,
                 nifCin, username, password,
-                sexe
+                "A"
         );
 
         try {
