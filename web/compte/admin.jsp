@@ -12,9 +12,9 @@
         <title>Admin</title>
     </head>
     <body>
-        <a href="AdminServlet">User managment</a>   
-        <a href="url">Rencontre managment</a>
-        <a href="url">Parriage managment</a>
+        <a href="admin/users">User managment</a>   
+        <a href="admin/matches">Rencontre managment</a>
+        <a href="admin/parriages">Parriage managment</a>
 
     </body>
 </html>
