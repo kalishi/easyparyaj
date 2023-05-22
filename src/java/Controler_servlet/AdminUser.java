@@ -34,6 +34,7 @@ public class AdminUser extends HttpServlet {
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(AdminUser.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
         request.getRequestDispatcher("/users.jsp").forward(request, response);
 
     }

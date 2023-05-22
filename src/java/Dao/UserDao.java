@@ -28,14 +28,31 @@ public class UserDao implements IServices<User> {
 
     @Override
     public ArrayList<User> lister() throws SQLException, ClassNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        conn = DBUtils.connect();
+        req = "select * from compte";
+         pstmt = conn.prepareStatement(req);
+        rs= pstmt.executeQuery();
+        
+        int code = rs.getInt("code_C");
+        String nom = rs.getString("Nom");
+        String prenom = rs.getString("Prenom");
+        String sexe = rs.getString("Sexe");
+        String adresse = rs.getString("Adresse");    
+        String nifCin = rs.getString("Nif_Cin");    
+        String tel = rs.getString("tel");
+        String username = rs.getString("username");        
+        Double  solde = rs.getDouble("solde");  
+        String etat  = rs.getString("etat");
+        String lieuNaissance = rs.getString("Lieu_de_naissance");
+        Boolean isAdmin = rs.getBoolean("isAdmin");
+
     }
 
     @Override
     public int enregistrer(User user) throws SQLException, ClassNotFoundException {
-         String sql = "INSERT INTO Compte (Nom, Prenom, Sexe, Adresse, Lieu_de_naissance, Date_de_naissance, " +
-                "Tel, Nif_Cin, Password, username, Solde, Etat, isAdmin) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
+        String sql = "INSERT INTO Compte (Nom, Prenom, Sexe, Adresse, Lieu_de_naissance, Date_de_naissance, "
+                + "Tel, Nif_Cin, Password, username, Solde, Etat, isAdmin) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
         conn = DBUtils.connect();
         pstmt = conn.prepareStatement(sql);
         pstmt.setString(1, user.getNom());
@@ -49,11 +66,11 @@ public class UserDao implements IServices<User> {
         pstmt.setString(9, user.getPassword());
         pstmt.setString(10, user.getUsername());
         pstmt.setDouble(11, user.getSolde());
-        pstmt.setString(12, user.getEtat());    
+        pstmt.setString(12, user.getEtat());
         pstmt.setBoolean(13, user.isAdmin());
 
         int nb = pstmt.executeUpdate();
-        
+
         return nb;
     }
 
@@ -90,17 +107,17 @@ public class UserDao implements IServices<User> {
                 double solde = rs.getDouble("Solde");
                 String etat = rs.getString("Etat");
                 Boolean isAdmin = rs.getBoolean("isAdmin");
-                 user = new User( nom,
+                user = new User(nom,
                         prenom, sexe, adresse,
                         lieu_de_naissance,
                         date_de_naissance,
                         tel, nif_Cin, username,
                         password, etat
                 );
-                 user.setCode(code_C);
-                 user.setSolde(solde);
-                 user.setIsAdmin(isAdmin);
-                 return user;
+                user.setCode(code_C);
+                user.setSolde(solde);
+                user.setIsAdmin(isAdmin);
+                return user;
             }
 
         } catch (Exception e) {
