@@ -13,18 +13,18 @@
     </head>
     <body>
         <h1>Edit user</h1>
-        <form action="signup" method="POST">
+        <form action="" method="POST">
             <%
-                if (request.getAttribute("signupError") != null) {
+                if (request.getAttribute("error") != null) {
             %>
-            <p class="error" style="color: red"><%= request.getAttribute("signupError")%></p>
+            <p class="error" style="color: red"><%= request.getAttribute("error")%></p>
 
             <%
                 }
             %>
            
-            <label for="solde">NIF/CIN:</label>
-            <input type="number" id="solde" name="solde" required value="<%= request.getAttribute("solde")%>"><br><br>
+            <label for="solde">Solde</label>
+            <input type="number" id="solde" name="solde" min="0" required value="<%= request.getAttribute("solde")%>"><br><br>
 
             <label for="username">Etat</label>
             <select id="etat">
@@ -32,8 +32,9 @@
                 <option value="S">Supprime</option>
                 <option value="F">Ferme</option>
             </select>
+<br><br>
 
-            <input type="submit" value="Signup">
+            <input type="submit" value="Edit">
         </form>
     </body>
 </html>

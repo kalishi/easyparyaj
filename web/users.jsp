@@ -46,7 +46,7 @@
                     <td><%= u.getEtat()%></td>
                     <td><%= u.getSolde()%></td>  
                     <td><%= u.isAdmin()%></td>       
-                    <td><a href="/users/edit/?id=<%= u.getCode()%>">Edit</a></td>
+                    <td><a href="users/edit?id=<%= u.getCode()%>">Edit</a></td>
 
 
                     

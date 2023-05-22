@@ -4,6 +4,8 @@
  */
 package Controler_servlet;
 
+import Dao.UserDao;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -16,14 +18,25 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author DTelcy
  */
-@WebServlet(name = "EditUser", urlPatterns = {"/admin/users/edit"})
+//@WebServlet(name = "EditUser", urlPatterns = {"/admin/users/edit"})
 public class EditUser extends HttpServlet {
 
-   
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+
+            User user = new UserDao().rechercher(request.getParameter("id"));
+            request.setAttribute("solde", user.getSolde());
+            request.setAttribute("etat", user.getEtat());
+        } catch (Exception e) {
+            request.setAttribute("error", e.getMessage());
         request.getRequestDispatcher("/editUser.jsp").forward(request, response);
+
+        }
+        request.getRequestDispatcher("/editUser.jsp").forward(request, response);
+
+
     }
 
     /**
@@ -37,7 +50,7 @@ public class EditUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**

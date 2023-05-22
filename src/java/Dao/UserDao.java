@@ -86,7 +86,7 @@ public class UserDao implements IServices<User> {
     public User rechercher(String id) throws SQLException, ClassNotFoundException {
 
         conn = DBUtils.connect();
-        req = "select * from compte where id="+id;
+        req = "select * from compte where code_C="+id;
         pstmt = conn.prepareStatement(req);
         rs = pstmt.executeQuery();
         User user = new User() ;
@@ -166,4 +166,8 @@ public class UserDao implements IServices<User> {
         return user;
     }
 
+    public int update(User u ){
+        
+        return 0;
+    }
 }
