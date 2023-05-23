@@ -13,17 +13,29 @@
         <title>Admin</title>
     </head>
     <body>
+        <%@include file="/header.jsp" %>
     <div id="admin-links">
-                <%@include file="/header.jsp" %>
+                <a href="admin/users">
                 <div class = "div-link">
-                    <a href="admin/users">User managment</a>   
+                    <p>User managment</p>
+                    
                 </div>
-                <div class = "div-link">
-                    <a href="admin/matches">Rencontre managment</a>
+                </a>   
+        
+                <a href="admin/matches">
+                    <div class = "div-link">
+                    <p>Rencontre managment</p>
+
+                    
                 </div>
-                <div class = "div-link">
-                    <a href="admin/pariages">Parriage managment</a>
-                </div>
+                </a>
+                <a href="admin/pariages">
+                    <div class = "div-link">
+                    <p>Parriage managment</p>
+
+                    
+                    </div>
+                </a>
         
         
    </div>
