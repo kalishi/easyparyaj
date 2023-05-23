@@ -35,7 +35,7 @@
                 <a href="logout">logout</a><%
             }else{
                 %>
-                <a href="account/profile">Profile</a>
+                <a href="accounts/profile">Profile</a>
                  <a href="accounts/pariage">New pariage</a>  
                  <a href="logout">logout</a>
                 <%

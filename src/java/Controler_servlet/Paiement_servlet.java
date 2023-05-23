@@ -25,46 +25,22 @@ import javax.servlet.http.HttpSession;
 @WebServlet(name = "Paiement_servlet", urlPatterns = {"/paiement"})
 public class Paiement_servlet extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");
-        User user = (User) request.getSession().getAttribute("user");
-        if (isAuthenticated == null || !isAuthenticated || user==null) {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
-        
-        PaiementDao dao = new PaiementDao();
+        if (AdminServlet.checkAdmin(request, response)) {
+            PaiementDao dao = new PaiementDao();
 //        HttpSession session = request.getSession();
-        try {
-            ArrayList<PaiementModel> data = dao.lister();
-            request.setAttribute("data", data);
-        } catch (ClassNotFoundException e) {
-            request.setAttribute("error", e.getStackTrace());
-        } catch (SQLException e) {
-            request.setAttribute("error", e.getStackTrace());
+            try {
+                ArrayList<PaiementModel> data = dao.lister();
+                request.setAttribute("data", data);
+            } catch (ClassNotFoundException e) {
+                request.setAttribute("error", e.getStackTrace());
+            } catch (SQLException e) {
+                request.setAttribute("error", e.getStackTrace());
+            }
+            request.getRequestDispatcher("/Paiement/Paiement.jsp").forward(request, response);
         }
-        request.getRequestDispatcher("/Paiement/Paiement.jsp").forward(request, response);
-
     }
 
     /**
@@ -78,11 +54,7 @@ public class Paiement_servlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");
-        User user = (User) request.getSession().getAttribute("user");
-        if (isAuthenticated == null || !isAuthenticated || user==null) {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
+        if (AdminServlet.checkAdmin(request, response)) {
         }
     }
 

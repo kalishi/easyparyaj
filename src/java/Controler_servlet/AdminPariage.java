@@ -4,7 +4,7 @@
  */
 package Controler_servlet;
 
-import Dao.MatcheDao;
+import Dao.PariageDao;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -20,31 +20,40 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author DTelcy
  */
-@WebServlet(name = "AdminRencontre", urlPatterns = {"/admin/matches"})
-public class AdminRencontre extends HttpServlet {
+@WebServlet(name = "AdminPariage", urlPatterns = {"/admin/pariages"})
+public class AdminPariage extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (AdminServlet.checkAdmin(request, response)) {
             try {
-                request.setAttribute("rencontres", new MatcheDao().lister());
+                request.setAttribute("pariages", new PariageDao().lister());
             } catch (SQLException ex) {
-                Logger.getLogger(AdminRencontre.class.getName()).log(Level.SEVERE, null, ex);
+                request.setAttribute("error", ex.getMessage());
+                Logger.getLogger(AdminPariage.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AdminRencontre.class.getName()).log(Level.SEVERE, null, ex);
+                request.setAttribute("error", ex.getMessage());
+                Logger.getLogger(AdminPariage.class.getName()).log(Level.SEVERE, null, ex);
             }
-            request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
+            request.getRequestDispatcher("/adminPariages.jsp").forward(request, response);
         }
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (AdminServlet.checkAdmin(request, response)) {
-
+        if(AdminServlet.checkAdmin(request, response)){
+        
         }
-
     }
 
     /**

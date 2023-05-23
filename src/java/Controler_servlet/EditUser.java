@@ -23,22 +23,21 @@ public class EditUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-     AdminServlet.checkAdmin(request, response);
 
-        
-        try {
+        if (AdminServlet.checkAdmin(request, response)) {
 
-            User userObject = new UserDao().rechercher(request.getParameter("id"));   
-            request.setAttribute("userObject", userObject);
+            try {
 
-        } catch (Exception e) {
-            request.setAttribute("error", e.getMessage());
+                User userObject = new UserDao().rechercher(request.getParameter("id"));
+                request.setAttribute("userObject", userObject);
+
+            } catch (Exception e) {
+                request.setAttribute("error", e.getMessage());
+                request.getRequestDispatcher("/editUser.jsp").forward(request, response);
+
+            }
             request.getRequestDispatcher("/editUser.jsp").forward(request, response);
-
         }
-        request.getRequestDispatcher("/editUser.jsp").forward(request, response);
-
     }
 
     /**
@@ -52,32 +51,32 @@ public class EditUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-              AdminServlet.checkAdmin(request, response);
+        if (AdminServlet.checkAdmin(request, response)) {
 
 //         User userObject = new UserDao().rechercher(request.getParameter("id"));   
 //            request.setAttribute("userObject", userObject);
-        double solde = Double.parseDouble(request.getParameter("solde"));
-        String etat = request.getParameter("etat");
-        String id = request.getParameter("id");
-        System.out.println("id:" + id + "etat:" + etat + "solde:" + solde);
-        
-        try {
-            System.out.println("Upading with dao");
-            int nb = new UserDao().update(id, solde, etat);
-            response.sendRedirect(request.getContextPath()+"/admin/users");
+            double solde = Double.parseDouble(request.getParameter("solde"));
+            String etat = request.getParameter("etat");
+            String id = request.getParameter("id");
+            System.out.println("id:" + id + "etat:" + etat + "solde:" + solde);
 
-        } catch (SQLException ex) {
-            request.setAttribute("error", ex.getMessage());
-            doGet(request, response);
+            try {
+                System.out.println("Upading with dao");
+                int nb = new UserDao().update(id, solde, etat);
+                response.sendRedirect(request.getContextPath() + "/admin/users");
+
+            } catch (SQLException ex) {
+                request.setAttribute("error", ex.getMessage());
+                doGet(request, response);
 //            request.getRequestDispatcher("/editUser.jsp").forward(request, response);
 
-        } catch (ClassNotFoundException ex) {
-            request.setAttribute("error", ex.getMessage());
-            doGet(request, response);
+            } catch (ClassNotFoundException ex) {
+                request.setAttribute("error", ex.getMessage());
+                doGet(request, response);
 //            request.getRequestDispatcher("/editUser.jsp").forward(request, response);
 
+            }
         }
-
     }
 
     /**

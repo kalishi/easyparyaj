@@ -37,26 +37,26 @@ public class Pariage_Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        LoginServlet.checkLogin(request, response);
-        User user = (User) request.getSession().getAttribute("user");
+        if (LoginServlet.checkLogin(request, response)) {
+            User user = (User) request.getSession().getAttribute("user");
 
-        MatcheDao dao = new MatcheDao();
-        try {
-            ArrayList<Matche> matches = dao.lister();
-            request.setAttribute("matches", matches);
-        } catch (Exception e) {
-            request.setAttribute("error", e.getMessage());
-        }
+            MatcheDao dao = new MatcheDao();
+            try {
+                ArrayList<Matche> matches = dao.lister();
+                request.setAttribute("matches", matches);
+            } catch (Exception e) {
+                request.setAttribute("error", e.getMessage());
+            }
 
-        try {
-            ArrayList<PariageModel> data = pDao.listeParieUser(user.getCode());
-            request.setAttribute("userPariages", data);
-        } catch (ClassNotFoundException e) {
-            request.setAttribute("error", e.getStackTrace());
-        } catch (SQLException e) {
-            request.setAttribute("error", e.getStackTrace());
-        }
-        request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+            try {
+                ArrayList<PariageModel> data = pDao.listeParieUser(user.getCode());
+                request.setAttribute("userPariages", data);
+            } catch (ClassNotFoundException e) {
+                request.setAttribute("error", e.getStackTrace());
+            } catch (SQLException e) {
+                request.setAttribute("error", e.getStackTrace());
+            }
+            request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
 
 //        try {
 //            lister(request, response);
@@ -66,50 +66,52 @@ public class Pariage_Servlet extends HttpServlet {
 //        } catch (ClassNotFoundException ex) {
 //            Logger.getLogger(Pariage_Servlet.class.getName()).log(Level.SEVERE, null, ex);
 //        }
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        LoginServlet.checkLogin(request, response);
+        if (LoginServlet.checkLogin(request, response)) {
 
-        User user = (User) request.getSession().getAttribute("user");
+            User user = (User) request.getSession().getAttribute("user");
 
-        String scorePrevu, idRencontre;
-        Double montantMise;
-        try {
-            scorePrevu = request.getParameter("score");
-            if (!Matche.isValidScoreFormat(scorePrevu)) {
-                request.setAttribute("pariageError", "Score invalide");
+            String scorePrevu, idRencontre;
+            Double montantMise;
+            try {
+                scorePrevu = request.getParameter("score");
+                if (!Matche.isValidScoreFormat(scorePrevu)) {
+                    request.setAttribute("pariageError", "Score invalide");
+                    request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+                    return;
+                }
+                montantMise = Double.parseDouble(request.getParameter("montant"));
+                idRencontre = request.getParameter("id_rencontre");
+
+            } catch (Exception e) {
+
+                e.printStackTrace();
+                request.setAttribute("pariageError", "error check some fields");
                 request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
                 return;
             }
-            montantMise = Double.parseDouble(request.getParameter("montant"));
-            idRencontre = request.getParameter("id_rencontre");
+            if (user.getSolde() < montantMise) {
+                request.setAttribute("pariageError", "Solde insuffisant");
+                request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+                return;
+            }
 
-        } catch (Exception e) {
+            PariageModel p = new PariageModel(Date.valueOf(LocalDate.now()), scorePrevu, montantMise, idRencontre, user.getCode());
 
-            e.printStackTrace();
-            request.setAttribute("pariageError", "error check some fields");
-            request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
-            return;
-        }
-        if (user.getSolde() < montantMise) {
-            request.setAttribute("pariageError", "Solde insuffisant");
-            request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
-            return;
-        }
-
-        PariageModel p = new PariageModel(Date.valueOf(LocalDate.now()), scorePrevu, montantMise, idRencontre, user.getCode());
-
-        try {
-            pDao.enregistrer(p);
-            String message = "Enregistrement effectue avec succes ! ";
-            request.setAttribute("msg", message);
-            request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
-        } catch (Exception ex) {
-            request.setAttribute("pariageError", "Echeque de l'enregistrement de pariage" + ex.getMessage());
-            request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+            try {
+                pDao.enregistrer(p);
+                String message = "Enregistrement effectue avec succes ! ";
+                request.setAttribute("msg", message);
+                request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+            } catch (Exception ex) {
+                request.setAttribute("pariageError", "Echeque de l'enregistrement de pariage" + ex.getMessage());
+                request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+            }
         }
     }
 

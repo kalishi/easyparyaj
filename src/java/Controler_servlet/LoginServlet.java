@@ -50,19 +50,19 @@ public class LoginServlet extends HttpServlet {
 
     }
 
-    public static void checkLogin(HttpServletRequest request, HttpServletResponse response)
+    public static Boolean checkLogin(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
         Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");
         User user = (User) request.getSession().getAttribute("user");
 
         if (isAuthenticated != null && isAuthenticated && user != null) {
-            return;
-        }
-        else{
+            return true;
+        } else {
             request.getRequestDispatcher("/login.jsp").forward(request, response);
+            return false;
+
         }
-//        
 
     }
 }

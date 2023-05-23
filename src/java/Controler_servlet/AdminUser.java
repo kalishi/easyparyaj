@@ -29,7 +29,7 @@ public class AdminUser extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-      AdminServlet.checkAdmin(request, response);
+      if(AdminServlet.checkAdmin(request, response)){
         
         try {
             request.setAttribute("users", new UserDao().lister());
@@ -40,7 +40,7 @@ public class AdminUser extends HttpServlet {
         }
         
         request.getRequestDispatcher("/users.jsp").forward(request, response);
-
+      }
     }
 
     /**
@@ -54,7 +54,7 @@ public class AdminUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-              AdminServlet.checkAdmin(request, response);
+              if(AdminServlet.checkAdmin(request, response)){}
 
     }
 
