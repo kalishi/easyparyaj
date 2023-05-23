@@ -4,6 +4,7 @@
     Author     : DTelcy
 --%>
 
+<%@page import="Model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,9 @@
         <title>Edit user</title>
     </head>
     <body>
-        <h1>Edit user</h1>
+        <%User userObject = (User)request.getAttribute("userObject");%>
+        
+        <h1>Edit user "<%=userObject.getUsername()%>"</h1>
         <form action="" method="POST">
             <%
                 if (request.getAttribute("error") != null) {
@@ -22,18 +25,17 @@
             <%
                 }
             %>
-           
+
             <label for="solde">Solde</label>
-            <input type="number" id="solde" name="solde" min="0" required value="<%= request.getAttribute("solde")%>"><br><br>
-
-            <label for="username">Etat</label>
-            <select id="etat">
-                <option value="A">Actif</option>
-                <option value="S">Supprime</option>
-                <option value="F">Ferme</option>
+            <input type="number" id="solde" name="solde" min="0" required value="<%=userObject.getSolde()%>"><br><br>
+            <label for="etat">Etat</label>
+            <select id="etat" name="etat">
+                <option value="A" <% if (userObject.getEtat().equalsIgnoreCase("A")) { %> selected <% } %>>Actif</option>
+                <option value="F" <% if (userObject.getEtat().equalsIgnoreCase("F")) { %> selected <% } %>>Ferme</option>
+                <option value="S" <% if (userObject.getEtat().equalsIgnoreCase("S")) { %> selected <% } %>>Supprime</option>
             </select>
-<br><br>
 
+            <br>
             <input type="submit" value="Edit">
         </form>
     </body>

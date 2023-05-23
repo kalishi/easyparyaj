@@ -8,7 +8,7 @@
         <servlet-name>AdminServlet</servlet-name>
         <servlet-class>Controler_servlet.AdminServlet</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>EditUser</servlet-name>
         <servlet-class>Controler_servlet.EditUser</servlet-class>
     </servlet>

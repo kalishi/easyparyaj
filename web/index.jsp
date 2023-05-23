@@ -13,7 +13,16 @@
     </head>
     <body>
         <h1>Hello World! home page</h1>
-        
+        <%
+                if (request.getAttribute("error") != null) {
+            %>
+            <p class="error" style="color: red"><%= request.getAttribute("error")%></p>
+
+            <%
+                }
+            %>
+            <br>   
+
         <a href="login">Login</a>        <a href="signup">Signup</a>     
         <a href="accounts/pariage">New pariage</a>     
         <a href="logout">logout</a>            

@@ -7,12 +7,8 @@ package Controler_servlet;
 import Dao.UserDao;
 import Model.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,9 +25,9 @@ public class EditUser extends HttpServlet {
             throws ServletException, IOException {
         try {
 
-            User user = new UserDao().rechercher(request.getParameter("id"));
-            request.setAttribute("solde", user.getSolde());
-            request.setAttribute("etat", user.getEtat());
+            User userObject = new UserDao().rechercher(request.getParameter("id"));   
+            request.setAttribute("userObject", userObject);
+
         } catch (Exception e) {
             request.setAttribute("error", e.getMessage());
             request.getRequestDispatcher("/editUser.jsp").forward(request, response);
@@ -53,16 +49,24 @@ public class EditUser extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+//         User userObject = new UserDao().rechercher(request.getParameter("id"));   
+//            request.setAttribute("userObject", userObject);
         double solde = Double.parseDouble(request.getParameter("solde"));
-        String etat = request.getParameter("etat").toString();
+        String etat = request.getParameter("etat");
         String id = request.getParameter("id");
-
+        System.out.println("id:" + id + "etat:" + etat + "solde:" + solde);
+        
         try {
+            System.out.println("Upading with dao");
             int nb = new UserDao().update(id, solde, etat);
+            request.getRequestDispatcher("/editUser.jsp").forward(request, response);
+
         } catch (SQLException ex) {
+            request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("/editUser.jsp").forward(request, response);
 
         } catch (ClassNotFoundException ex) {
+            request.setAttribute("error", ex.getMessage());
             request.getRequestDispatcher("/editUser.jsp").forward(request, response);
 
         }

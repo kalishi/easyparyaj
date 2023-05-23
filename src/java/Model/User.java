@@ -160,12 +160,13 @@ public class User {
     public void setIsAdmin(Boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
-    
-    
+
     @Override
     public String toString() {
-        return "User{" + "code=" + code + ", nom=" + nom + '}';
+        return "User{" + "code=" + code + ", isAdmin=" + isAdmin + '}';
     }
+    
+    
     
     
 }

@@ -20,7 +20,12 @@ public class LoginServlet extends HttpServlet {
 
         UserDao dao = new UserDao();
         User user = dao.getUser(username, password);
-        if (user != null) {
+        if(user != null && !user.getEtat().equalsIgnoreCase("A")){
+             request.setAttribute("loginError", "Account is inactive or have been deleted");
+            // Redirect back to the login page
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+        }
+        if (user != null && user.getEtat().equalsIgnoreCase("A")) {
             //set session attribute to indicate successful authentication
             request.getSession(true).setAttribute("authenticated", true);
             request.getSession(true).setAttribute("user", user);

@@ -32,19 +32,19 @@ public class AdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-//         Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");   
-//        User user = (User) request.getSession().getAttribute("user");
-
-//        if (isAuthenticated == null || !isAuthenticated || user==null) {
-//            response.sendRedirect(request.getContextPath() + "/login");
-//            return;
-//        }
+         Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");   
+        User user = (User) request.getSession().getAttribute("user");
+        if (isAuthenticated == null || !isAuthenticated || user==null) {
+            response.sendRedirect(request.getContextPath() + "/login");
+            return;
+        }
 //        
-//        if(!user.isAdmin()){
-//            request.setAttribute("msg", "please login as admin");
-//            response.sendRedirect(request.getContextPath() + "/login");
-//            return;
-//        }
+        if(!user.isAdmin()){
+            request.setAttribute("error", "please login as admin to acces admin");
+            request.getRequestDispatcher(request.getContextPath()+"/").forward(request, response);
+
+            return;
+        }
         
 //        request.setAttribute("username", user.getUsername());
         request.getRequestDispatcher("/compte/admin.jsp").forward(request, response);

@@ -48,6 +48,7 @@ public class UserDao implements IServices<User> {
             Boolean isAdmin = rs.getBoolean("isAdmin");
             User user = new User(nom, prenom, sexe, adresse, lieuNaissance, lieuNaissance, tel, nifCin, username, prenom, etat);
             user.setSolde(solde);
+            user.setIsAdmin(isAdmin);
             user.setCode(code);
             arr.add(user);
 
@@ -105,6 +106,7 @@ public class UserDao implements IServices<User> {
             Boolean isAdmin = rs.getBoolean("isAdmin");
             user = new User(nom, prenom, sexe, adresse, lieuNaissance, lieuNaissance, tel, nifCin, username, prenom, etat);
             user.setSolde(solde);
+            user.setIsAdmin(isAdmin);
             user.setCode(code);
         }
         DBUtils.close(rs, pstmt, conn);
