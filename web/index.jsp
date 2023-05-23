@@ -40,6 +40,55 @@
             </div>
         </div>
     </div>
+        
+        
+        <table border="3" cellspacing="3" cellpadding="3">
+            <thead>
+                <tr>
+                    <th>code Rencontre</th>
+                    <th>Type</th>
+                    <th>Date</th>   
+                    <th>Pays</th>
+                    <th>Heures</th>
+                    <th>Equipre Receuveuse</th>
+                    <th>Equipre Visiteuse</th>
+                    <th>Cote</th>         
+                    <th>Score Final</th>
+
+                    
+                </tr>
+            </thead>
+            <tbody>
+                
+                    <%
+                       ArrayList<Matche> matches = ( ArrayList<Matche>)request.getAttribute("");
+                       if(matches != null && !matches.isEmpty()){
+                          for(Matche m: matches){
+                    %>
+                    <tr>
+                    <td><%= m.getId()%></td>
+                    <td><%= m.getType()%></td>
+                    <td><%= m.getDate()%></td>   
+                    <td><%= m.getPays()%></td>
+                    <td><%= m.getHeure()%></td>
+                    <td><%= m.getEquipeR()%></td>  
+                    <td><%= m.getEquipeV()%></td>      
+                    <td><%= m.getCote()%></td>       
+                    <td><%= m.getScoreFinal()%></td>       
+                    <td><a href="users/edit?id=<%= m.getId()%>">Edit</a></td>
+                    </tr>                
+                    <% }
+                        } 
+                        else{
+                             %>
+                        <h5>No Matches</h5>
+                        <% 
+                        }
+                    %>
+                    
+                
+            </tbody>
+        </table>
     <script src="static/carousel.js"></script>
 </body>
 </html>

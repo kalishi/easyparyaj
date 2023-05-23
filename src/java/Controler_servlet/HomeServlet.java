@@ -4,8 +4,12 @@
  */
 package Controler_servlet;
 
+import Dao.MatcheDao;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,6 +27,13 @@ public class HomeServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        try {
+                request.setAttribute("rencontres", new MatcheDao().lister());
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminRencontre.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(AdminRencontre.class.getName()).log(Level.SEVERE, null, ex);
+            }
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 
