@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" href="/static/main.css"/>
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/static/main.css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin</title>
     </head>

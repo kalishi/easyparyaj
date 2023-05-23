@@ -4,6 +4,9 @@
     Author     : DTelcy
 --%>
 
+<%@page import="Model.Matche"%>
+<%@page import="Model.Matche"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="Model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -61,7 +64,7 @@
             <tbody>
                 
                     <%
-                       ArrayList<Matche> matches = ( ArrayList<Matche>)request.getAttribute("");
+                       ArrayList<Matche> matches = ( ArrayList<Matche>)request.getAttribute("rencontres");
                        if(matches != null && !matches.isEmpty()){
                           for(Matche m: matches){
                     %>

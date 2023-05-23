@@ -14,6 +14,8 @@
         <title>Admin - users</title>
     </head>
     <body>
+            <%@include file="/header.jsp" %>
+
         <h1>User list</h1>
         
           <table border="3" cellspacing="3" cellpadding="3">

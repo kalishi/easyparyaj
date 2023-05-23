@@ -37,7 +37,7 @@
             <tbody>
                 
                     <%
-                       ArrayList<Matche> matches = ( ArrayList<Matche>)request.getAttribute("");
+                       ArrayList<Matche> matches = ( ArrayList<Matche>)request.getAttribute("rencontres");
                        if(matches != null && !matches.isEmpty()){
                           for(Matche m: matches){
                     %>
