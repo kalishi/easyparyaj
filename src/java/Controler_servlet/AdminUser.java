@@ -5,6 +5,7 @@
 package Controler_servlet;
 
 import Dao.UserDao;
+import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
@@ -27,6 +28,9 @@ public class AdminUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+      AdminServlet.checkAdmin(request, response);
+        
         try {
             request.setAttribute("users", new UserDao().lister());
         } catch (SQLException ex) {
@@ -50,7 +54,8 @@ public class AdminUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+              AdminServlet.checkAdmin(request, response);
+
     }
 
     /**

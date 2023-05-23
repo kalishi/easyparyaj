@@ -23,6 +23,10 @@ public class EditUser extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+     AdminServlet.checkAdmin(request, response);
+
+        
         try {
 
             User userObject = new UserDao().rechercher(request.getParameter("id"));   
@@ -48,6 +52,7 @@ public class EditUser extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+              AdminServlet.checkAdmin(request, response);
 
 //         User userObject = new UserDao().rechercher(request.getParameter("id"));   
 //            request.setAttribute("userObject", userObject);
@@ -59,15 +64,17 @@ public class EditUser extends HttpServlet {
         try {
             System.out.println("Upading with dao");
             int nb = new UserDao().update(id, solde, etat);
-            request.getRequestDispatcher("/editUser.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath()+"/admin/users");
 
         } catch (SQLException ex) {
             request.setAttribute("error", ex.getMessage());
-            request.getRequestDispatcher("/editUser.jsp").forward(request, response);
+            doGet(request, response);
+//            request.getRequestDispatcher("/editUser.jsp").forward(request, response);
 
         } catch (ClassNotFoundException ex) {
             request.setAttribute("error", ex.getMessage());
-            request.getRequestDispatcher("/editUser.jsp").forward(request, response);
+            doGet(request, response);
+//            request.getRequestDispatcher("/editUser.jsp").forward(request, response);
 
         }
 

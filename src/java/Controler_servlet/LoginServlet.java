@@ -45,6 +45,15 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        checkLogin(request, response);
+        request.getRequestDispatcher("/login.jsp").forward(request, response);
+
+    }
+    
+    
+    public static void checkLogin(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
         Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");     
         User user = (User) request.getSession().getAttribute("user");
 
@@ -53,7 +62,5 @@ public class LoginServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/accounts/profile");
             return;
         }
-        request.getRequestDispatcher("/login.jsp").forward(request, response);
-
     }
 }

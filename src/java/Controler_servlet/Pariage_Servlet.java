@@ -37,13 +37,9 @@ public class Pariage_Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");
+        LoginServlet.checkLogin(request, response);
         User user = (User) request.getSession().getAttribute("user");
-        System.out.println(user + " " + isAuthenticated);
-        if (isAuthenticated == null || !isAuthenticated || user == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
+
         MatcheDao dao = new MatcheDao();
         try {
             ArrayList<Matche> matches = dao.lister();
@@ -75,14 +71,10 @@ public class Pariage_Servlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        LoginServlet.checkLogin(request, response);
 
-        Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");
         User user = (User) request.getSession().getAttribute("user");
 
-        if (isAuthenticated == null || !isAuthenticated || user == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
         String scorePrevu, idRencontre;
         Double montantMise;
         try {
@@ -102,13 +94,12 @@ public class Pariage_Servlet extends HttpServlet {
             request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
             return;
         }
-        if(user.getSolde()<montantMise){
+        if (user.getSolde() < montantMise) {
             request.setAttribute("pariageError", "Solde insuffisant");
             request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
             return;
         }
-        
-        
+
         PariageModel p = new PariageModel(Date.valueOf(LocalDate.now()), scorePrevu, montantMise, idRencontre, user.getCode());
 
         try {

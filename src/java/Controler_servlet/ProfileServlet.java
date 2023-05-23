@@ -45,16 +45,7 @@ public class ProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
-        Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");   
-        User user = (User) request.getSession().getAttribute("user");
-
-        if (isAuthenticated == null || !isAuthenticated || user==null) {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
-//        HashMap user
-//        request.setAttribute("", user);
-        
+        LoginServlet.checkLogin(request, response);
         request.getRequestDispatcher("/compte/profile.jsp").forward(request, response);
     }
 
@@ -69,6 +60,8 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+                LoginServlet.checkLogin(request, response);
+
 //        processRequest(request, response);
     }
 

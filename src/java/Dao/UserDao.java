@@ -173,7 +173,9 @@ public class UserDao implements IServices<User> {
         req = "update compte set solde = ?, etat = ? where code_C = ?";
         pstmt = conn.prepareStatement(req);
         pstmt.setDouble(1, solde);
-        pstmt.setString(2, etat);
+        pstmt.setString(2, etat);     
+        pstmt.setString(3, id);
+
         int nb = pstmt.executeUpdate();
         return nb;
     }
