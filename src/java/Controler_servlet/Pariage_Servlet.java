@@ -50,7 +50,7 @@ public class Pariage_Servlet extends HttpServlet {
 
             try {
                 ArrayList<PariageModel> data = pDao.listeParieUser(user.getCode());
-                request.setAttribute("userPariages", data);
+                request.setAttribute("pariages", data);
             } catch (ClassNotFoundException e) {
                 request.setAttribute("error", e.getStackTrace());
             } catch (SQLException e) {

@@ -14,7 +14,7 @@
     <body>
         <a href="admin/users">User managment</a>   
         <a href="admin/matches">Rencontre managment</a>
-        <a href="admin/parriages">Parriage managment</a>
+        <a href="admin/pariages">Parriage managment</a>
 
     </body>
 </html>

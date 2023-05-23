@@ -31,13 +31,13 @@ public class AdminPariage extends HttpServlet {
                 request.setAttribute("pariages", new PariageDao().lister());
             } catch (SQLException ex) {
                 request.setAttribute("error", ex.getMessage());
-                Logger.getLogger(AdminPariage.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
                 request.setAttribute("error", ex.getMessage());
-                Logger.getLogger(AdminPariage.class.getName()).log(Level.SEVERE, null, ex);
             }
             request.getRequestDispatcher("/adminPariages.jsp").forward(request, response);
         }
+        
+        
     }
 
     /**

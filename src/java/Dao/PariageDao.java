@@ -43,7 +43,7 @@ public class PariageDao implements IServices<PariageModel> {
         String Prenom;
 
 //        Req = "Select Parriage.Date_P, Parriage.Score_prevu, Parriage.Montant_mise, Parriage.Solde_fiche, Compte.Nom, Compte.Prenom FROM Parriage inner join Compte on Parriage.Code_P=Compte.code_C";
-        Req = "Select *from Pariage";
+        Req = "Select *from Parriage";
         con = DBUtils.connect();
         prepar = con.prepareStatement(Req);
         rst = prepar.executeQuery();
@@ -65,6 +65,7 @@ public class PariageDao implements IServices<PariageModel> {
             arModel.add(prg);
         }
         DBUtils.close(rst, prepar, con);
+        System.out.println("fin lister pariage dao");
         return arModel;
     }
 

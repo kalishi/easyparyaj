@@ -22,17 +22,13 @@
                     <th>Score prevu</th>
                     <th>Montant mise</th>  
                     <th>cote fiche</th>    
-  
                     <th>Solde fiche</th>
                 </tr>
             </thead>
             <tbody>
                 
                     <%
-                        User user = (User)request.getSession().getAttribute("user");
-                        PariageDao pdao = new PariageDao();
-                        System.out.println(user);
-                       ArrayList<PariageModel> prm = pdao.listeParieUser(user.getCode());
+                       ArrayList<PariageModel> prm =(ArrayList<PariageModel>)request.getAttribute("pariages");
                        if(prm != null && !prm.isEmpty()){
                           for(PariageModel p: prm){
                     %>
