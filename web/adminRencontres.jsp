@@ -14,6 +14,8 @@
         <title>JSP Page</title>
     </head>
     <body>
+                <%@include file="header.jsp" %>
+
         <h1>Matche Management</h1>
         
          <table border="3" cellspacing="3" cellpadding="3">

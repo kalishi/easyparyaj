@@ -16,6 +16,8 @@
         <title>JSP Page</title>
     </head>
     <body>
+    <%@include file="header.jsp" %>
+
         <h1>profile page welcome ${request.getAttribute("user")}</h1>
     </body>
 </html>

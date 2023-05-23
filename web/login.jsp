@@ -10,14 +10,17 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="static/login.css" />
     </head>
     <body>
-        <h1>Login</h1>
+        
         <form name="login-form" action="login" method="POST">
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username">
-            <label for="password">password</label>
-            <input type="password" id="password" name="password" maxlength="200">
+            <h1 class="login_title">Login to your Account</h1>
+            <h1 class="subtitle">Enter your Details</h1>
+<!--            <label for="username">Username</label>-->
+            <input type="text" id="username" name="username" placeholder="Your User Name">
+<!--            <label for="password">Password</label>-->
+            <input type="password" id="password" name="password" maxlength="200" placeholder="Your Password">
             <input type="submit" value="Connect">
             <%
                 if (request.getAttribute("loginError") != null) {

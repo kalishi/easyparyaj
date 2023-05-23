@@ -10,44 +10,36 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>EasyParyaj | Home</title>
+        <link rel="stylesheet" href="static/index.css"/>
+        <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,301,701,300,501,401,901,400&display=swap" rel="stylesheet">
     </head>
     <body>
-        <h1>Hello World! home page</h1>
+        <%@include file="header.jsp" %>
+
         <%
                 if (request.getAttribute("error") != null) {
-            %>
-            <p class="error" style="color: red"><%= request.getAttribute("error")%></p>
+        %>
+        <p class="error" style="color: red"><%= request.getAttribute("error")%></p>
 
-            <%
-                }
-            %>
-            <br>   
-
-              
-          
-        
         <%
-            if(session.getAttribute("user") !=null && (Boolean)session.getAttribute("authenticated") ){
-            User user = (User)session.getAttribute("user");
-            if(user.isAdmin()){
-                %><a href="admin">admin</a>
-                <a href="logout">logout</a><%
-            }else{
-                %>
-                <a href="accounts/profile">Profile</a>
-                 <a href="accounts/pariage">New pariage</a>  
-                 <a href="logout">logout</a>
-                <%
             }
-            }else{
-                %> <a href="login">Login</a> 
-                 <a href="signup">Signup</a> 
-                <%   
-            }
-        %>        
-           
+        %> 
 
- 
-    </body>
+        
+    <div class="carousel">
+        <div class="slides">
+            <div class="slide">
+                <img src="static/img1.jpg" alt="Image 1">
+            </div>
+            <div class="slide">
+                <img src="static/img2.jpg" alt="Image 2">
+            </div>
+            <div class="slide">
+                <img src="static/img3.jpg" alt="Image 3">
+            </div>
+        </div>
+    </div>
+    <script src="static/carousel.js"></script>
+</body>
 </html>

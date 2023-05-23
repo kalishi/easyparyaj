@@ -1,0 +1,80 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    /*background-image : url('../static/bg.jpg');*/
+    background-color: #E5E5E5;
+}
+
+form {
+    position: absolute;
+    margin: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    padding: 1em;
+}
+
+form label {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    color: #333;
+    margin-left: .2em;
+}
+
+.login_title {
+    margin-bottom: 1em;
+    font-family: 'Montserrat', sans-serif;
+    /*text-align: center;*/
+    margin-bottom: .3em;
+}
+
+.subtitle {
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 2.5em;
+    font-family: 'Montserrat', sans-serif;
+    color: gray;
+    text-transform: uppercase;
+    letter-spacing: 8px;
+    font-weight: 400;
+
+}
+
+form input {
+    display: block;
+    width: 100%;
+    margin-bottom: 1em;
+    padding: .75em 1em;
+    border: 1px solid #ddd;
+    background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: rgba(9, 30, 66, 0.25) 0px 1px 1px, rgba(9, 30, 66, 0.13) 0px 0px 1px 1pxinset;
+}
+
+form input::placeholder {
+    font-family: 'Montserrat', sans-serif;
+}
+
+form input:focus {
+    outline: 0;
+}
+
+form input[type="submit"] {
+    margin-top: 2em;
+    padding: .75em;
+    background-color: #FCA311;
+    color: #f0f0f0;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+}
+
+@media screen and (min-width: 700px) {
+    form {
+        width: 500px;
+        padding: 1em;
+    }
+}

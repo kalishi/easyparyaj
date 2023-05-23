@@ -14,6 +14,8 @@
         <title>JSP Page</title>
     </head>
     <body>
+                <%@include file="header.jsp" %>
+
         <h1>Pariage management</h1>
          <% 
                  if ( request.getAttribute("error") !=null){

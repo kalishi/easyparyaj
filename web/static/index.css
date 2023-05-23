@@ -1,0 +1,86 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    /*overflow-x: hidden;*/
+    /*border: 2px solid green;*/
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #14DB3F;
+    /*border: 2px solid red;*/
+}
+
+.btn1 {
+    background-color: #fff;
+    border-radius: 50px;
+    padding: .25em .75em;
+}
+
+.btn2 {
+    color: #fff;
+    border: 2px solid #fff;
+    border-radius: 50px;
+    padding: .25em .75em;
+}
+
+nav ul {
+    display: flex;
+    gap: 1em;
+    margin-right: 1em;
+}
+
+nav ul li {
+    list-style: none;
+    font-size: 1.2rem;
+    font-family: 'Montserrat',sans-serif;
+
+}
+
+nav ul li a{
+    color: #FCA311;
+    font-weight: 500;
+}
+
+#logo {
+    color: #E5E5E5;
+    margin-left: 1em;
+}
+
+/*hero section*/
+.carousel {
+    width: 100%;
+    overflow: hidden;
+    position: relative; /* Add position relative */
+}
+
+.slides {
+    display: flex;
+    transition: transform 0.8s ease-in-out;
+    width: 100%; /* Add width */
+}
+
+.carousel img {
+    width: 100%;
+    height: 450px;
+    object-fit: cover; /* Adjust image display */
+}
+
+.slide {
+    flex: 0 0 100%; /* Set width for each slide */
+}
+
+
+h1 {
+    font-family: 'Montserrat', sans-serif;
+}

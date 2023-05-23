@@ -1,0 +1,34 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+body {
+    background-image : url('../static/images/bg.jpg');
+    background-color: #E5E5E5;
+}
+
+.group {
+    display: flex;
+    gap: 1em;
+}
+
+.group label {
+    display: block;
+    marging: 0;
+}
+
+form input {
+    display: block;
+    padding: .5em 1em;
+    border-radius: 3px;
+    border: 2px solid #ddd;
+    margin: 0;
+}
+
+form input:focus {
+    outline: none;
+}
+
+form select {
+    width: 100%;
+}
