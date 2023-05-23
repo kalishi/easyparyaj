@@ -4,6 +4,7 @@
     Author     : DTelcy
 --%>
 
+<%@page import="Model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,10 +24,29 @@
             %>
             <br>   
 
-        <a href="login">Login</a>        <a href="signup">Signup</a>     
-        <a href="accounts/pariage">New pariage</a>     
-        <a href="logout">logout</a>            
-        <a href="admin">admin</a>      
+              
+          
+        
+        <%
+            if(session.getAttribute("user") !=null && (Boolean)session.getAttribute("authenticated") ){
+            User user = (User)session.getAttribute("user");
+            if(user.isAdmin()){
+                %><a href="admin">admin</a>
+                <a href="logout">logout</a><%
+            }else{
+                %>
+                <a href="account/profile">Profile</a>
+                 <a href="accounts/pariage">New pariage</a>  
+                 <a href="logout">logout</a>
+                <%
+            }
+            }else{
+                %> <a href="login">Login</a> 
+                 <a href="signup">Signup</a> 
+                <%   
+            }
+        %>        
+           
 
  
     </body>

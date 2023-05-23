@@ -20,8 +20,8 @@ public class LoginServlet extends HttpServlet {
 
         UserDao dao = new UserDao();
         User user = dao.getUser(username, password);
-        if(user != null && !user.getEtat().equalsIgnoreCase("A")){
-             request.setAttribute("loginError", "Account is inactive or have been deleted");
+        if (user != null && !user.getEtat().equalsIgnoreCase("A")) {
+            request.setAttribute("loginError", "Account is inactive or have been deleted");
             // Redirect back to the login page
             request.getRequestDispatcher("/login.jsp").forward(request, response);
         }
@@ -29,10 +29,10 @@ public class LoginServlet extends HttpServlet {
             //set session attribute to indicate successful authentication
             request.getSession(true).setAttribute("authenticated", true);
             request.getSession(true).setAttribute("user", user);
-            request.getSession(true).setAttribute("user_id",user.getCode());
+            request.getSession(true).setAttribute("user_id", user.getCode());
 
             // Redirect to a secure page
-            response.sendRedirect(request.getContextPath() +"/accounts/profile");
+            response.sendRedirect(request.getContextPath() + "/accounts/profile");
         } else {
             // Set an attribute to indicate authentication failure
             request.setAttribute("loginError", "Invalid username or password");
@@ -49,18 +49,20 @@ public class LoginServlet extends HttpServlet {
         request.getRequestDispatcher("/login.jsp").forward(request, response);
 
     }
-    
-    
+
     public static void checkLogin(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");     
+
+        Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");
         User user = (User) request.getSession().getAttribute("user");
 
-        if (isAuthenticated != null && isAuthenticated && user !=null) {
-            
-            response.sendRedirect(request.getContextPath() + "/accounts/profile");
+        if (isAuthenticated != null && isAuthenticated && user != null) {
             return;
         }
+        else{
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+        }
+//        
+
     }
 }
