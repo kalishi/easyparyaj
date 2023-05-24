@@ -79,6 +79,7 @@ public class UserDao implements IServices<User> {
         pstmt.setBoolean(13, user.isAdmin());
 
         int nb = pstmt.executeUpdate();
+        DBUtils.close(rs, pstmt, conn);
 
         return nb;
     }
@@ -113,7 +114,7 @@ public class UserDao implements IServices<User> {
         return user;
     }
 
-    public User getUser(String username, String password_) {
+    public User getUser(String username, String password_) throws SQLException, ClassNotFoundException{
         User user = null;
         try {
             // Connect to the database
@@ -164,19 +165,21 @@ public class UserDao implements IServices<User> {
                 ex.printStackTrace();
             }
         }
+        DBUtils.close(rs, pstmt, conn);
 
         return user;
     }
 
     public int update(String id, double solde, String etat) throws SQLException, ClassNotFoundException{
         conn = DBUtils.connect();
+        System.out.println("le solde a set est :"+solde);
         req = "update compte set solde = ?, etat = ? where code_C = ?";
         pstmt = conn.prepareStatement(req);
         pstmt.setDouble(1, solde);
         pstmt.setString(2, etat);     
         pstmt.setString(3, id);
-
         int nb = pstmt.executeUpdate();
+        DBUtils.close(rs, pstmt, conn);
         return nb;
     }
 }

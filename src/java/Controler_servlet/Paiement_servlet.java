@@ -5,6 +5,7 @@
 package Controler_servlet;
 
 import Dao.PaiementDao;
+import Dao.PariageDao;
 import Dao.UserDao;
 import Model.PaiementModel;
 import Model.User;
@@ -12,6 +13,7 @@ import com.mysql.cj.Session;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -64,18 +66,27 @@ public class Paiement_servlet extends HttpServlet {
             Double Montant= Double.parseDouble(request.getParameter("montant"));
             PaiementModel modelPaie= new PaiementModel();
             modelPaie.setId_Compte(user.getCode());
-            modelPaie.setMontant(Montant);
+            modelPaie.setId_Pariage(request.getParameter("id_pariage"));      
+            modelPaie.setDate_Paiement(java.sql.Date.valueOf(LocalDate.now()));
             modelPaie.setNom(user.getNom());
             modelPaie.setPrenom(user.getPrenom());
+            modelPaie.setMontant(Montant);
             
             PaiementDao DaoPaie= new PaiementDao();
             try {
                 DaoPaie.enregistrer(modelPaie);
                 UserDao usedao=new UserDao();
                 usedao.update(user.getCode(), user.getSolde()+Montant, user.getEtat());
+                new PariageDao().update("P", modelPaie.getId_Pariage());
+                request.setAttribute("msg", "pay Succes");
+                response.sendRedirect(request.getContextPath()+"/admin");
             } catch (SQLException ex) {
                 Logger.getLogger(Paiement_servlet.class.getName()).log(Level.SEVERE, null, ex);
+                request.setAttribute("error", ex);
+                response.sendRedirect(request.getContextPath()+"/admin");
             } catch (ClassNotFoundException ex) {
+                request.setAttribute("error", ex);
+                response.sendRedirect(request.getContextPath()+"/admin");
                 Logger.getLogger(Paiement_servlet.class.getName()).log(Level.SEVERE, null, ex);
             }
         }

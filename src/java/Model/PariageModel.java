@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  * @author abdue
  */
 public class PariageModel {
+    private String etat;
     private String Code_Pariage;
     private Date Date_Pariage;
     private String Scrore_pevu;
@@ -95,6 +96,14 @@ public class PariageModel {
 
     public void setId_R(String Id_R) {
         this.Id_R = Id_R;
+    }
+
+    public String getEtat() {
+        return etat;
+    }
+
+    public void setEtat(String etat) {
+        this.etat = etat;
     }
     
 

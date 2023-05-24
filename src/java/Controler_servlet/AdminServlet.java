@@ -67,7 +67,7 @@ public class AdminServlet extends HttpServlet {
         User user = (User) request.getSession().getAttribute("user");
         if (isAuthenticated == null || !isAuthenticated || user == null) {
 //            response.sendRedirect(request.getContextPath() + "/login");
-//                request.getRequestDispatcher("").forward(request, response);
+//            request.getRequestDispatcher("").forward(request, response);
             LoginServlet l = new LoginServlet();
             l.doGet(request, response);
             return false;

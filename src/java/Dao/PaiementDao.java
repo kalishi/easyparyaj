@@ -48,11 +48,11 @@ public class PaiementDao implements IServices<PaiementModel>{
              Date_Paiement= rst.getDate("Date_Paiement");
              Montant= rst.getDouble("Montant");
              Nom= rst.getString("Nom");   
-//             idC= rst.getString("Id_C");
+             idC= rst.getString("Id_C");
              Prenom= rst.getString("Prenom");
              PaiementModel pm= new PaiementModel(Code_Paiement,Montant,Nom,Prenom);
              pm.setDate_Paiement(Date_Paiement);
-//           pm.setId_Compte(idC);
+           pm.setId_Compte(idC);
              ar.add(pm);
     }
     

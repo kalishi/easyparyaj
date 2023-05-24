@@ -63,12 +63,15 @@ public class PariageDao implements IServices<PariageModel> {
             solde_fiche = rst.getDouble("Solde_fiche");
             String code = rst.getString("Code_P");
             String idC = rst.getString("id_C");
-            String idR = rst.getString("Id_rencontre");
+            String idR = rst.getString("Id_rencontre");   
+            String etat = rst.getString("etat");
+
 
 //            Nom = rst.getString("Nom");
 //            Prenom = rst.getString("Prenom");
             PariageModel prg = new PariageModel(date_parriage, score_prevu, montantMise, idR, idC);
             prg.setCode_Pariage(code);
+            prg.setEtat(etat);
             arModel.add(prg);
         }
         DBUtils.close(rst, prepar, con);
@@ -82,7 +85,7 @@ public class PariageDao implements IServices<PariageModel> {
             return 0;
         }
         //To change body of generated methods, choose Tools | Templates.
-        Req = "INSERT INTO Parriage(Date_P,Score_prevu,Montant_mise,Solde_fiche,Id_C,Id_rencontre) values(?,?,?,?,?,?)";
+        Req = "INSERT INTO Parriage(Date_P,Score_prevu,Montant_mise,Solde_fiche,Id_C,Id_rencontre,etat) values(?,?,?,?,?,?,?)";
         con = DBUtils.connect();
         prepar = con.prepareStatement(Req);
         prepar.setString(1, LocalDate.now().toString());
@@ -90,7 +93,9 @@ public class PariageDao implements IServices<PariageModel> {
         prepar.setDouble(3, obj.getMontant_mise());
         prepar.setDouble(4, obj.getSolde_fiche());
         prepar.setString(5, obj.getId_C());
-        prepar.setString(6, obj.getId_R());
+        prepar.setString(6, obj.getId_R());  
+        prepar.setString(7, "N");
+
 
         int n = prepar.executeUpdate();
         DBUtils.close(rst, prepar, con);
@@ -123,15 +128,31 @@ public class PariageDao implements IServices<PariageModel> {
             solde_fiche = rst.getDouble("Solde_fiche");
             String code = rst.getString("Code_P");
             String idC = rst.getString("id_C");
-            String idR = rst.getString("Id_rencontre");
+            String idR = rst.getString("Id_rencontre");          
+            String etat= rst.getString("etat");
+
 
 //            Nom = rst.getString("Nom");
 //            Prenom = rst.getString("Prenom");
             PariageModel prg = new PariageModel(date_parriage, score_prevu, montantMise, idR, idC);
             prg.setCode_Pariage(code);
+            prg.setEtat(etat);
             arModel.add(prg);
         }
         DBUtils.close(rst, prepar, con);
         return arModel;
+    }
+    
+        public int update(String etat, String id) throws SQLException, ClassNotFoundException {
+     
+        //To change body of generated methods, choose Tools | Templates.
+        Req = "update parriage set etat=? where id=?";
+        con = DBUtils.connect();
+        prepar = con.prepareStatement(Req);
+        prepar.setString(1, etat);
+        prepar.setString(2, id);
+        int n = prepar.executeUpdate();
+        DBUtils.close(rst, prepar, con);
+        return n;
     }
 }

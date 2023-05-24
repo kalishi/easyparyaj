@@ -6,6 +6,7 @@ package Controler_servlet;
 
 import Dao.MatcheDao;
 import Dao.PariageDao;
+import Dao.UserDao;
 import Model.Matche;
 import Model.PariageModel;
 import Model.User;
@@ -108,6 +109,7 @@ public class Pariage_Servlet extends HttpServlet {
 
             try {
                 pDao.enregistrer(p);
+                int nb = new UserDao().update(user.getCode(), user.getSolde()-montantMise, user.getEtat());
                 String message = "Enregistrement effectue avec succes ! ";
                 request.setAttribute("msg", message);
 //                request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
