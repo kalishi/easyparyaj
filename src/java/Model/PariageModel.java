@@ -123,8 +123,13 @@ public class PariageModel {
 //        this.Prenom = Prenom;
 //    }
 
+    public boolean CheckGain() throws SQLException, ClassNotFoundException{
+        String score_final=new MatcheDao().rechercher(Id_R).getScoreFinal();
+        
+        if(Scrore_pevu.equalsIgnoreCase(score_final)){
+            return true;
+        }
+            return false;
+    }
     
-    
-   
-
 }

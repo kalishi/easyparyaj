@@ -29,7 +29,14 @@ public class PariageDao implements IServices<PariageModel> {
 
     @Override
     public PariageModel rechercher(String id) throws SQLException, ClassNotFoundException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+      
+       // Req="Select *from Parriage where Code_P=?";
+       //con=DBUtils.connect();
+        //prepar=con.prepareStatement(Req);
+        //rst=prepar.executeQuery();
+        
+        //Pariage pr
+        return null;
     }
 
     @Override
