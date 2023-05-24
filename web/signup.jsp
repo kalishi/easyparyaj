@@ -51,10 +51,10 @@
 
               
                     <!--<label for="telephone">Téléphone</label>-->
-                    <input type="text" id="telephone" name="telephone" required placeholder="Phone">
+                    <input type="number" id="telephone" name="telephone" required placeholder="Phone">
 
                     <!--<label for="nifCin">NIF/CIN</label>-->
-                    <input type="text" id="nifCin" name="nifCin" required placeholder="CIN">
+                    <input type="number" id="nifCin" name="nifCin" required placeholder="CIN">
 
 
         
@@ -65,7 +65,7 @@
 
 
             <!--<label for="password2">Confirm Password</label>-->
-            <input type="password" id="password2" name="password2" minlength="6" required>
+            <input type="password" id="password2" name="password2" minlength="6" required placeholder="Confirm Password">
 
             <input type="submit" value="Signup">
         </form>

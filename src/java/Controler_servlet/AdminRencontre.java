@@ -77,13 +77,14 @@ public class AdminRencontre extends HttpServlet {
             } catch (Exception e) {
                 request.setAttribute("matcheError", e);
 //                request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
-                doGet(request, response); 
+                doGet(request, response);
                 return;
             }
 
             if (!Matche.isValidScoreFormat(request.getParameter("score"))) {
                 request.setAttribute("matcheError", "Score invalide");
-                request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
+//                request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
+                doGet(request, response);
                 return;
             }
 
@@ -92,13 +93,14 @@ public class AdminRencontre extends HttpServlet {
             } catch (SQLException ex) {
                 request.setAttribute("matcheError", ex.getMessage());
 //                response.sendRedirect(request.getContextPath() + "/admin");
-                request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
+                doGet(request, response);
 
+//                request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
             } catch (ClassNotFoundException ex) {
                 request.setAttribute("matcheError", ex.getMessage());
 //                response.sendRedirect(request.getContextPath() + "/admin");
-                request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
-
+//                request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
+                doGet(request, response);
 
             }
 

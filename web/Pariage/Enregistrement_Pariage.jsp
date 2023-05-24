@@ -36,7 +36,7 @@
                 }
             %>
             <label>Score Prevu</label>
-            <input type="text" name="score" placeholder="score" required><br>
+            <input type="text" name="score" placeholder="Ex: 3-0" required><br>
              <label>Montant Mise</label>
              <input type="number" name="montant" placeholder="montant" min="10" required><br>
              <label>Solde Fiche</label>
