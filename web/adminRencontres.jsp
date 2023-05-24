@@ -1,6 +1,6 @@
 
-<%! 
-    String type[]={"Championat","Coupe du Monde","Eliminatoire","Amical"}; 
+<%!
+    String type[] = {"Championat", "Coupe du Monde", "Eliminatoire", "Amical"};
 %>
 <%@page import="Model.Matche"%>
 <%@page import="java.util.ArrayList"%>
@@ -13,67 +13,76 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/static/profile.css" />
     </head>
     <body>
-                <%--<%@include file="header.jsp" %>--%>
+        <%--<%@include file="header.jsp" %>--%>
 
         <h1>Matche Management</h1>
-         <form method="post" action="${pageContext.request.contextPath}/admin/matches">
-        <div>
-            <label for="type" >Type Match</label>
-            <div class="col-sm-10">
-                <select name="type" class="form-control">
-                    <%for (String s:type){%>
-                    <option value="<%=s%>"><%=s%></option>
-                    <%}%>
-                </select>
-            </div>
-        </div>
-        <div >
-            <label for="pays" class="col">Pays</label>
-            <div class="col-sm-10">
-                <input type="text" id="pays" name="pays">
-            </div>
-        </div>
-        <div>
-            <label for="dateMatch" >Date Mach</label>
-            <div class="col-sm-10">
-                <input type="date" id="dateMatch" name="dateMatch">
-            </div>
-        </div>
-        <div>
-            <label for="heureMatch" >Heure Mach</label>
-            <div class="col-sm-10">
-                <input type="time" id="heureMatch" name="heureMatch">
-            </div>
-        </div>
-        <div>
-            <label for="equipeR">Equipe Receveuse</label>
+        <form method="post" action="${pageContext.request.contextPath}/admin/matches">
+
+            <%
+                if (request.getAttribute("matcheError") != null) {
+            %>
+            <p class="error" style="color: red"><%= request.getAttribute("matcheError")%></p>
+
+            <%
+                }
+            %>
             <div>
-                <input type="text" id="equipeR" name="equipeR">
+                <label for="type" >Type Match</label>
+                <div class="col-sm-10">
+                    <select name="type" class="form-control">
+                        <%for (String s : type) {%>
+                        <option value="<%=s%>"><%=s%></option>
+                        <%}%>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div>
-            <label for="equipeV">Equipe Visiteuse</label>
+            <div >
+                <label for="pays" class="col">Pays</label>
+                <div class="col-sm-10">
+                    <input type="text" id="pays" name="pays">
+                </div>
+            </div>
             <div>
-                <input type="text" id="equipeV" name="equipeV">
+                <label for="dateMatch" >Date Mach</label>
+                <div class="col-sm-10">
+                    <input type="date" id="dateMatch" name="dateMatch">
+                </div>
             </div>
-        </div>
-        <div>
-            <label for="cote">Cote</label>
             <div>
-                <input type="number" id="cote" name="cote">
+                <label for="heureMatch" >Heure Mach</label>
+                <div class="col-sm-10">
+                    <input type="time" id="heureMatch" name="heureMatch">
+                </div>
             </div>
-        </div>
-        <div>
-            <label for="score">Score Final</label>
             <div>
-                <input type="text" disabled  id="score" name="score">
+                <label for="equipeR">Equipe Receveuse</label>
+                <div>
+                    <input type="text" id="equipeR" name="equipeR">
+                </div>
             </div>
-        </div>
-        <input type="submit"   value="enregistrer">
-    </form>
+            <div>
+                <label for="equipeV">Equipe Visiteuse</label>
+                <div>
+                    <input type="text" id="equipeV" name="equipeV">
+                </div>
+            </div>
+            <div>
+                <label for="cote">Cote</label>
+                <div>
+                    <input type="number" id="cote" name="cote" step="0.1">
+                </div>
+            </div>
+            <div>
+                <label for="score">Score Final</label>
+                <div>
+                    <input type="text"  id="score" name="score" placeholder="Ex: 2-0">
+                </div>
+            </div>
+            <input type="submit"   value="enregistrer">
+        </form>
         <br><br>
         <h2>Liste de Rencontre</h2>
-         <table>
+        <table>
             <thead>
                 <tr>
                     <th>code Rencontre</th>
@@ -87,17 +96,17 @@
                     <th>Score Final</th>
                     <th>Action</th>
 
-                    
+
                 </tr>
             </thead>
             <tbody>
-                
-                    <%
-                       ArrayList<Matche> matches = ( ArrayList<Matche>)request.getAttribute("rencontres");
-                       if(matches != null && !matches.isEmpty()){
-                          for(Matche m: matches){
-                    %>
-                    <tr>
+
+                <%
+                    ArrayList<Matche> matches = (ArrayList<Matche>) request.getAttribute("rencontres");
+                    if (matches != null && !matches.isEmpty()) {
+                        for (Matche m : matches) {
+                %>
+                <tr>
                     <td><%= m.getId()%></td>
                     <td><%= m.getType()%></td>
                     <td><%= m.getDate()%></td>   
@@ -108,18 +117,17 @@
                     <td><%= m.getCote()%></td>       
                     <td><%= m.getScoreFinal()%></td>       
                     <td><a href="<%=request.getContextPath()%>/admin/matches/edit?id=<%= m.getId()%>">Edit</a></td>
-                    </tr>                
-                    <% }
-                        } 
-                        else{
-                             %>
-                        <h5>No Matches</h5>
-                        <% 
-                        }
-                    %>
-                    
-                
-            </tbody>
-        </table>
-    </body>
+                </tr>                
+                <% }
+                } else {
+                %>
+            <h5>No Matches</h5>
+            <%
+                }
+            %>
+
+
+        </tbody>
+    </table>
+</body>
 </html>

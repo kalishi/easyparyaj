@@ -17,21 +17,21 @@ import javax.servlet.http.HttpServletResponse;
  * @author DTelcy
  */
 public class AdminServlet extends HttpServlet {
-
+    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         if (checkAdmin(request, response)) {
             request.getRequestDispatcher("/compte/admin.jsp").forward(request, response);
         }
     }
- 
+    
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-         if (checkAdmin(request, response)) {
-
+        if (checkAdmin(request, response)) {
+            
         }
     }
 
@@ -60,14 +60,16 @@ public class AdminServlet extends HttpServlet {
 //            }
 //        }
 //    }
-    
     public static boolean checkAdmin(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
         Boolean isAuthenticated = (Boolean) request.getSession().getAttribute("authenticated");
         User user = (User) request.getSession().getAttribute("user");
         if (isAuthenticated == null || !isAuthenticated || user == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
+//            response.sendRedirect(request.getContextPath() + "/login");
+//                request.getRequestDispatcher("").forward(request, response);
+            LoginServlet l = new LoginServlet();
+            l.doGet(request, response);
             return false;
         } else {
             if (!user.isAdmin()) {

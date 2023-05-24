@@ -25,8 +25,9 @@ public class ProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
        
-        LoginServlet.checkLogin(request, response);
+        if(LoginServlet.checkLogin(request, response)){
         request.getRequestDispatcher("/compte/profile.jsp").forward(request, response);
+        }
     }
 
     @Override

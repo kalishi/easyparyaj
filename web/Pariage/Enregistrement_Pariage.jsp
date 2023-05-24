@@ -17,6 +17,7 @@
     </head>
     <body>
                 <%@include file="/header.jsp" %>
+                <br><br>                <br><br>
 
         <h1>Enregistrement</h1>
         <form action="pariage" method="post">

@@ -45,9 +45,9 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        checkLogin(request, response);
-        request.getRequestDispatcher("/login.jsp").forward(request, response);
-
+        if (checkLogin(request, response)) {
+            request.getRequestDispatcher("/login.jsp").forward(request, response);
+        }
     }
 
     public static Boolean checkLogin(HttpServletRequest request, HttpServletResponse response)
@@ -59,7 +59,7 @@ public class LoginServlet extends HttpServlet {
         if (isAuthenticated != null && isAuthenticated && user != null) {
             return true;
         } else {
-            request.getRequestDispatcher("/login.jsp").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/login.jsp");
             return false;
 
         }

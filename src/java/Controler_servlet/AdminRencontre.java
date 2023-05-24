@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -48,7 +47,6 @@ public class AdminRencontre extends HttpServlet {
         if (AdminServlet.checkAdmin(request, response)) {
             System.out.println("Methode post cree rencontre");
 //            recuper les champ et apple la methode Enregistrer de rencontre dao
-
             String type = request.getParameter("type");
             String pays = request.getParameter("pays");
             if (!Matche.isValidScoreFormat("score")) {
@@ -56,26 +54,27 @@ public class AdminRencontre extends HttpServlet {
                 request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
                 return;
             }
-            Date date = Date.valueOf(request.getParameter("date"));
-            Float cote = Float.parseFloat(request.getParameter("cote"));
+            Float cote = Float.valueOf(request.getParameter("cote"));
             Matche model = new Matche();
             model.setType(type);
             model.setPays(pays);
-            model.setDate(Date.valueOf(LocalDate.now()));
-            model.setHeure(Time.valueOf(LocalTime.now()));
-            model.setEquipeR(request.getParameter("equipe_rec"));
-            model.setEquipeV(request.getParameter("equipe_vis"));
+            model.setDate(Date.valueOf(request.getParameter("dateMatch")));
+            model.setHeure(Time.valueOf(request.getParameter("heureMatch")));
+            model.setEquipeR(request.getParameter("equipeR"));
+            model.setEquipeV(request.getParameter("equipeV"));
             model.setCote(cote);
             model.setScoreFinal(request.getParameter("score"));
             model.setEtat("N");
             MatcheDao dao = new MatcheDao();
-
+            System.out.println("saving the model");
             try {
                 dao.enregistrer(model);
             } catch (SQLException ex) {
                 request.setAttribute("matcheError", ex.getMessage());
+                response.sendRedirect(request.getContextPath() + "/admin");
             } catch (ClassNotFoundException ex) {
                 request.setAttribute("matcheError", ex.getMessage());
+                response.sendRedirect(request.getContextPath() + "/admin");
 
             }
 

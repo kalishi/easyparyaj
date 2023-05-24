@@ -63,7 +63,7 @@ public class EditUser extends HttpServlet {
             try {
                 System.out.println("Upading with dao");
                 int nb = new UserDao().update(id, solde, etat);
-                response.sendRedirect(request.getContextPath() + "/admin/users");
+                response.sendRedirect(request.getContextPath() + "/admin");
 
             } catch (SQLException ex) {
                 request.setAttribute("error", ex.getMessage());

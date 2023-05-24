@@ -82,7 +82,8 @@ public class Pariage_Servlet extends HttpServlet {
                 scorePrevu = request.getParameter("score");
                 if (!Matche.isValidScoreFormat(scorePrevu)) {
                     request.setAttribute("pariageError", "Score invalide");
-                    request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+//                    request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+                    doGet(request, response);
                     return;
                 }
                 montantMise = Double.parseDouble(request.getParameter("montant"));
@@ -92,12 +93,14 @@ public class Pariage_Servlet extends HttpServlet {
 
                 e.printStackTrace();
                 request.setAttribute("pariageError", "error check some fields");
-                request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+//                request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+                doGet(request, response);
                 return;
             }
             if (user.getSolde() < montantMise) {
                 request.setAttribute("pariageError", "Solde insuffisant");
-                request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+//                request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+                doGet(request, response);
                 return;
             }
 
@@ -107,10 +110,12 @@ public class Pariage_Servlet extends HttpServlet {
                 pDao.enregistrer(p);
                 String message = "Enregistrement effectue avec succes ! ";
                 request.setAttribute("msg", message);
-                request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+//                request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+                doGet(request, response);
             } catch (Exception ex) {
                 request.setAttribute("pariageError", "Echeque de l'enregistrement de pariage" + ex.getMessage());
-                request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+//                request.getRequestDispatcher("/Pariage/Enregistrement_Pariage.jsp").forward(request, response);
+                doGet(request, response);
             }
         }
     }
@@ -147,7 +152,7 @@ public class Pariage_Servlet extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-        
+
     }// </editor-fold>
 
 }
