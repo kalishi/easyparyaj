@@ -15,6 +15,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>EasyParyaj | Home</title>
         <link rel="stylesheet" href="static/index.css"/>
+        <link rel="stylesheet" href="static/profile.css" />
         <link href="https://api.fontshare.com/v2/css?f[]=satoshi@900,700,500,301,701,300,501,401,901,400&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -44,8 +45,8 @@
         </div>
     </div>
         
-        
-        <table border="3" cellspacing="3" cellpadding="3">
+        <div class="content">
+        <table >
             <thead>
                 <tr>
                     <th>code Rencontre</th>
@@ -92,6 +93,7 @@
                 
             </tbody>
         </table>
+        </div>
     <script src="static/carousel.js"></script>
 </body>
 </html>

@@ -1,22 +1,194 @@
-#admin-links{
-    margin-top: 50px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 5em;
-    align-items: center;
-    justify-content: center
-    
+:root {
+    --primary-color: #F6F6F6;
+    --second-color: #182061;
+    --third-color: #16267D;
+    --fourth-color: #F4B504;
+}
+:root {
+    /*======colors=======*/
+    --body-color: #F6F6F6;
+    --sidebar-color: #FFF;
+    --primary-color: #16267D;
+    --primary-color-light: #F6F5FF;
+    --toggle-color: #DDD;
+    --text-color: #707070;
+
+    /* ====== Transition ====== */
+    --tran-02: all 0.2s ease;
+    --tran-03: all 0.3s ease;
+    --tran-04: all 0.4s ease;
+    --tran-05: all 0.5s ease;
 }
 
-.div-link{
-    width: 200px;
-    padding: 2em;
-    box-shadow: 1px 1px 16px #707070; 
-    
+*, *::before, *::after {
+    box-sizing: border-box;
 }
-.div-link p{
-    font-size: 1em;
-    color: #121212;
-    
-    text-transform: uppercase;
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Clash Display', sans-serif;
+    background-color: var(--body-color);
+    overflow-x: auto;
+}
+
+.sidebar {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 5em;
+    /*height: 100%;*/
+    padding: 1em;
+    transition: var(--tran-05);
+    z-index: 100;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.menu-links {
+    padding: 1em;
+    margin: 0;
+    display: flex;
+    gap: 2em;
+    /*background: red;*/
+}
+
+.link {
+    display: block;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.sidebar li {
+    margin-top: .75em;
+    list-style: none;
+    display: block;
+    cursor: pointer;
+    background-color: #f0f0f0;
+    border: 1px solid var(--toggle-color);
+    border-radius: 10px;
+    padding: 1em;
+}
+
+.sidebar li a {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+}
+
+.sidebar li .icon {
+    min-width: 60px;
+    font-size: 1.2rem;
+    font-family: 'outfit',sans-serif;
+    display: block;
+}
+
+.sidebar li .text {
+    transition: var(--tran-02);
+}
+
+.sidebar li .text {
+    font-family: 'Clash Display', sans-serif;
+    font-size: 1rem;
+}
+
+.sidebar li a:hover .text {
+    opacity: .7;
+}
+
+.sidebar .menu-bar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.link img {
+    width: 30%;
+}
+
+.log-out a {
+    display: flex;
+    align-items: center;
+    gap: 1em;
+    text-decoration: none;
+}
+
+.log-out a h2 {
+    font-size: 1rem;
+    font-weight: 200;
+}
+
+.pages {
+    position: relative;
+    min-height: 100vh;
+    padding: 1em;
+    margin-top: 20em;
+    width: 100vw;
+    /*background-color: var(--body-color);*/
+    /*background: green;*/
+    transition: var(--tran-05);
+    /*background: red;*/
+
+}
+
+aside nav .tabs .tab.is-active, li[data-switcher] {
+    background-color: var(--primary-color) !important;
+    font-weight: 700;
+    color: #fff !important;
+}
+
+.pages .page {
+    display: none;
+}
+
+.pages .page.is-active {
+    display: block;
+    height: 100vh;
+}
+
+.menu-links li.is-active {
+    background-color: var(--primary-color)!important;
+    transition: all .5s ease-in-out;
+    color: #fff !important;
+}
+
+.button-content {
+    margin-top: 100%;
+}
+
+.log-out a {
+    background-color: #16267D;
+    color: #fff;
+    padding: .5em;
+    text-align: center;
+    border-radius: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .pages {
+        position: relative;
+        height: 100vh;
+        /*margin-left: 17em;*/
+        margin-top: 15em;
+        width: 100%;
+        /*background-color: red;*/
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0px;
+        /*height: 100%;*/
+        padding: 1em;
+        background-color: var(--sidebar-color);
+        transition: var(--tran-05);
+        z-index: 100;
+    }
+
+    .burger_menu {
+        display: none;
+    }
 }

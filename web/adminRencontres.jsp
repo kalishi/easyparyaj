@@ -1,9 +1,7 @@
-<%-- 
-    Document   : adminRencontres
-    Created on : May 22, 2023, 9:59:08 PM
-    Author     : DTelcy
---%>
 
+<%! 
+    String type[]={"Championat","Coupe du Monde","Eliminatoire","Amical"}; 
+%>
 <%@page import="Model.Matche"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,23 +10,70 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
+        <link rel="stylesheet" href="<%=request.getContextPath()%>/static/profile.css" />
     </head>
     <body>
-                <%@include file="header.jsp" %>
+                <%--<%@include file="header.jsp" %>--%>
 
         <h1>Matche Management</h1>
-        <form action="" method="post">
-            
-            <h3>Nouveau rencontres</h3>
-            <label>Type</label>
-            ... list des autres chanm ...
-                        <input type="submit" value="Submit">
-
-            <input type="hidden" id="action" name="action" value="cree">
-        </form>
+         <form method="post" action="${pageContext.request.contextPath}/Matches">
+        <div>
+            <label for="type" >Type Match</label>
+            <div class="col-sm-10">
+                <select name="type" class="form-control">
+                    <%for (String s:type){%>
+                    <option value="<%=s%>"><%=s%></option>
+                    <%}%>
+                </select>
+            </div>
+        </div>
+        <div >
+            <label for="pays" class="col">Pays</label>
+            <div class="col-sm-10">
+                <input type="text" id="pays" name="pays">
+            </div>
+        </div>
+        <div>
+            <label for="dateMatch" >Date Mach</label>
+            <div class="col-sm-10">
+                <input type="date" id="dateMatch" name="dateMatch">
+            </div>
+        </div>
+        <div>
+            <label for="heureMatch" >Heure Mach</label>
+            <div class="col-sm-10">
+                <input type="time" id="heureMatch" name="heureMatch">
+            </div>
+        </div>
+        <div>
+            <label for="equipeR">Equipe Receveuse</label>
+            <div>
+                <input type="text" id="equipeR" name="equipeR">
+            </div>
+        </div>
+        <div>
+            <label for="equipeV">Equipe Visiteuse</label>
+            <div>
+                <input type="text" id="equipeV" name="equipeV">
+            </div>
+        </div>
+        <div>
+            <label for="cote">Cote</label>
+            <div>
+                <input type="number" id="cote" name="cote">
+            </div>
+        </div>
+        <div>
+            <label for="score">Score Final</label>
+            <div>
+                <input type="text" disabled  id="score" name="score">
+            </div>
+        </div>
+        <input type="submit"   value="enregistrer">
+    </form>
         <br><br>
         <h2>Liste de Rencontre</h2>
-         <table border="3" cellspacing="3" cellpadding="3">
+         <table>
             <thead>
                 <tr>
                     <th>code Rencontre</th>

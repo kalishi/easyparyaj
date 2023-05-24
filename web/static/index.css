@@ -19,10 +19,15 @@ header {
     justify-content: space-between;
     background-color: #14DB3F;
     /*border: 2px solid red;*/
+    position : fixed;
+    width: 100%;
+    z-index: 99;
 }
 
 .btn1 {
-    background-color: #fff;
+    background: #FCA311;
+    color: #fff;
+    border: 2px solid #FCA311;
     border-radius: 50px;
     padding: .25em .75em;
 }
@@ -48,7 +53,7 @@ nav ul li {
 }
 
 nav ul li a{
-    color: #FCA311;
+    color: #fff;
     font-weight: 500;
 }
 

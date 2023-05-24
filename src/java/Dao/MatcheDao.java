@@ -74,9 +74,7 @@ public class MatcheDao implements IServices<Matche> {
             arr.add(matche);
         }
         DBUtils.close(rst, prepar, con);
-
         return arr;
-
     }
 
     @Override

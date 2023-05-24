@@ -39,7 +39,7 @@
              <label>Montant Mise</label>
              <input type="number" name="montant" placeholder="montant" min="10" required><br>
              <label>Solde Fiche</label>
-             <input type="number" name="solde" placeholder="solde" disabled="true"><br>
+             <input type="number" name="solde" placeholder="solde" disabled><br>
             <label>Choisir la rencontre</label>
             <select id="id_rencontre" name="id_rencontre" required>
              <%

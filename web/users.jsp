@@ -12,13 +12,15 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin - users</title>
+        <link rel="stylesheet" href="static/users.css" />
     </head>
     <body>
-            <%@include file="/header.jsp" %>
-
+        
+            <%--<%@include file="/header.jsp" %>--%>
+            <div class="content">
         <h1>User list</h1>
         
-          <table border="3" cellspacing="3" cellpadding="3">
+          <table>
             <thead>
                 <tr>
                     <th>username</th>
@@ -65,5 +67,6 @@
                 
             </tbody>
         </table>
+            </div>
     </body>
 </html>

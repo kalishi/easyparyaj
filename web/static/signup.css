@@ -10,25 +10,38 @@ body {
 .group {
     display: flex;
     gap: 1em;
+    margin: 0;
+    padding-bottom: 0;
+    /*border: 2px solid red;*/
 }
 
-.group label {
-    display: block;
-    marging: 0;
+form {
+    width: 70%;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap:0 1em;
+    
 }
-
-form input {
+    
+form input,
+form select {
     display: block;
-    padding: .5em 1em;
+    padding: .75em 1em;
     border-radius: 3px;
     border: 2px solid #ddd;
-    margin: 0;
+    margin: .5em;
 }
 
 form input:focus {
     outline: none;
 }
 
-form select {
-    width: 100%;
+form input[type="submit"] {
+    background:#FCA311;
+    color: #fff;
+    cursor: pointer;
+}
+
+.sign_title {
+    font-family: 'Montserrat', sans-serif;
 }
