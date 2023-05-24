@@ -17,21 +17,21 @@
     <div id="admin-links">
                 <a href="admin/users">
                 <div class = "div-link">
-                    <p>User managment</p>
+                    <h3>User managment</h3>
                     
                 </div>
                 </a>   
         
                 <a href="admin/matches">
                     <div class = "div-link">
-                    <p>Rencontre managment</p>
+                    <h3>Rencontre managment</h3>
 
                     
                 </div>
                 </a>
                 <a href="admin/pariages">
                     <div class = "div-link">
-                    <p>Parriage managment</p>
+                    <h3>Parriage managment</h3>
 
                     
                     </div>

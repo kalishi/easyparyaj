@@ -16,8 +16,10 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <%
+        User u = (User)session.getAttribute("user");%>
     <%@include file="/header.jsp" %>
 
-        <h1>profile page welcome ${request.getAttribute("user")}</h1>
+        <h1>profile page welcome back <%=u.getUsername()%></h1>
     </body>
 </html>

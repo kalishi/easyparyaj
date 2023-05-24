@@ -17,7 +17,17 @@
                 <%@include file="header.jsp" %>
 
         <h1>Matche Management</h1>
-        
+        <form action="" method="post">
+            
+            <h3>Nouveau rencontres</h3>
+            <label>Type</label>
+            ... list des autres chanm ...
+                        <input type="submit" value="Submit">
+
+            <input type="hidden" id="action" name="action" value="cree">
+        </form>
+        <br><br>
+        <h2>Liste de Rencontre</h2>
          <table border="3" cellspacing="3" cellpadding="3">
             <thead>
                 <tr>
@@ -51,7 +61,7 @@
                     <td><%= m.getEquipeV()%></td>      
                     <td><%= m.getCote()%></td>       
                     <td><%= m.getScoreFinal()%></td>       
-                    <td><a href="users/edit?id=<%= m.getId()%>">Edit</a></td>
+                    <td><a href="matches/edit?id=<%= m.getId()%>">Edit</a></td>
                     </tr>                
                     <% }
                         } 

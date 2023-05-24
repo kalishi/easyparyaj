@@ -16,7 +16,7 @@
         <title>Enregistrer</title>
     </head>
     <body>
-                <%@include file="header.jsp" %>
+                <%@include file="/header.jsp" %>
 
         <h1>Enregistrement</h1>
         <form action="pariage" method="post">

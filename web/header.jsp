@@ -10,26 +10,17 @@
                     User user = (User) session.getAttribute("user");
                     if (user.isAdmin()) {
             %>
-
-            <li><a href="admin" class="btn btn1">admin</a></li>
-            <li> <a href="logout" class="btn2">logout</a></li>
-                <%
-                } else {
-                %>
-
-            <li><a href="accounts/profile">Profile</a></li>
-            <li><a href="accounts/pariage">New pariage</a>  </li>
-            <li><a href="logout">logout</a></li>
-                <%
-                    }
-                } else {
-
-                %> 
-
-            <li><a href="login" class="btn btn1">Log in</a> </li>
-            <li><a href="signup" class="btn2">Sign up</a> </li>
-                <%                        }
-                %>
+            <li><a href="<%=request.getContextPath()%>/admin" class="btn btn1">admin</a></li>
+            <%}%>
+            <li><small><%=user.getSolde()%></small></li>
+            <li><a href="<%=request.getContextPath()%>/accounts/profile">Profile</a></li>
+            <li><a href="<%=request.getContextPath()%>/accounts/pariage">New pariage</a>  </li>
+            <li><a href="<%=request.getContextPath()%>/logout">logout</a></li>
+                
+            <%}else{%>
+            <li><a href="<%=request.getContextPath()%>/login" class="btn btn1">Log in</a> </li>
+            <li><a href="<%=request.getContextPath()%>/signup" class="btn2">Sign up</a> </li>
+                <%}%>
         </ul>
     </nav>
 </header>
