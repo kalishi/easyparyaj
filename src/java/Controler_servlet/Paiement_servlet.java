@@ -7,10 +7,14 @@ package Controler_servlet;
 import Dao.PaiementDao;
 import Model.PaiementModel;
 import Model.User;
+import com.mysql.cj.Session;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -22,7 +26,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author abdue
  */
-@WebServlet(name = "Paiement_servlet", urlPatterns = {"/paiement"})
+@WebServlet(name = "Paiement_servlet", urlPatterns = {"/admin/paiement"})
 public class Paiement_servlet extends HttpServlet {
 
     @Override
@@ -55,8 +59,22 @@ public class Paiement_servlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (AdminServlet.checkAdmin(request, response)) {
+            User user=(User) request.getSession().getAttribute("user");
+            Double Montant= Double.parseDouble(request.getParameter("montant"));
+            PaiementModel modelPaie= new PaiementModel();
+            modelPaie.setId_Compte(user.getCode());
+            modelPaie.setMontant(Montant);
+            modelPaie.setNom(user.getNom());
+            modelPaie.setPrenom(user.getPrenom());
             
-            
+            PaiementDao DaoPaie= new PaiementDao();
+            try {
+                DaoPaie.enregistrer(modelPaie);
+            } catch (SQLException ex) {
+                Logger.getLogger(Paiement_servlet.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ClassNotFoundException ex) {
+                Logger.getLogger(Paiement_servlet.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 

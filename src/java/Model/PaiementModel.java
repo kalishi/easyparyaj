@@ -4,7 +4,7 @@
  */
 package Model;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 /**
  *
@@ -12,7 +12,7 @@ import java.time.LocalDate;
  */
 public class PaiementModel {
     private String idPaiement;
-    private LocalDate date_Paiement;
+    private Date date_Paiement;
     private Double Montant;
     private String id_Pariage;
     private String id_Compte;
@@ -32,7 +32,7 @@ public class PaiementModel {
         return idPaiement;
     }
 
-    public LocalDate getDate_Paiement() {
+    public Date getDate_Paiement() {
         return date_Paiement;
     }
 
@@ -60,7 +60,7 @@ public class PaiementModel {
         this.idPaiement = idPaiement;
     }
 
-    public void setDate_Paiement(LocalDate date_Paiement) {
+    public void setDate_Paiement(Date date_Paiement) {
         this.date_Paiement = date_Paiement;
     }
 

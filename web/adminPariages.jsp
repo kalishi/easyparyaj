@@ -48,8 +48,12 @@
                     <td><%= p.getMontant_mise()%></td>      
                     <td><%= p.getCoteMatch()%></td>  
                     <td><%= p.getSolde_fiche()%></td>   
-                    <td><a href="edit?id=<%= p.getCode_Pariage()%>">Edit</a></td>  
-                    <!--<td><a href="edit?id=<%= p.getCode_Pariage()%>">Pay User</a></td>-->    
+                    <td>
+                        <form action="<%= request.getContextPath()%>/admin/paiement">
+                            <input type="hidden" name="montant" value="<%=p.getSolde_fiche()%>">
+                            <input type="submit" name="button" value="Payer">
+                        </form>
+                    </td> 
                     </tr>                
                     <% }
                         } 

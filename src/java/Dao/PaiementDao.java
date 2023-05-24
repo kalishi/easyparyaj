@@ -51,7 +51,7 @@ public class PaiementDao implements IServices<PaiementModel>{
 //             idC= rst.getString("Id_C");
              Prenom= rst.getString("Prenom");
              PaiementModel pm= new PaiementModel(Code_Paiement,Montant,Nom,Prenom);
-             pm.setDate_Paiement(Date_Paiement.toLocalDate());
+             pm.setDate_Paiement(Date_Paiement);
 //           pm.setId_Compte(idC);
              ar.add(pm);
     }
@@ -62,6 +62,17 @@ public class PaiementDao implements IServices<PaiementModel>{
 
     @Override
     public int enregistrer(PaiementModel p) throws SQLException, ClassNotFoundException {
+       String Req="Insert into Paiement values(?,?,?,?,?)";
+       con=DBUtils.connect();
+       prepar=con.prepareStatement(Req);
+       prepar.setString(1, p.getIdPaiement());
+       prepar.setDate(2, p.getDate_Paiement());
+       prepar.setDouble(3, p.getMontant());
+       prepar.setString(4, p.getId_Pariage());
+       prepar.setString(5, p.getId_Compte());
+       
+       int n=prepar.executeUpdate();
+       DBUtils.close(rst, prepar, con);
         return 0;
     }
 
