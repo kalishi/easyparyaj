@@ -34,7 +34,8 @@ public class PaiementDao implements IServices<PaiementModel>{
         String Prenom;
         ArrayList<PaiementModel> ar = new ArrayList<>();
         //Construction de la requette
-        String req = "SELECT Paiement.Code_Paiement, Paiement.Date_Paiement, Paiement.Montant,Compte.Nom, Compte.Prenom FROM Paiement INNER JOIN Compte ON Paiement.Id_C = code_C";
+String req="select *from Paiement";
+//        String req = "SELECT Paiement.Code_Paiement, Paiement.Date_Paiement, Paiement.Montant,Compte.Nom, Compte.Prenom FROM Paiement INNER JOIN Compte ON Paiement.Id_C = code_C";
         //recuperation de la connexion a la base
          con= DBUtils.connect();
          // Passage de la requette a la Prepare

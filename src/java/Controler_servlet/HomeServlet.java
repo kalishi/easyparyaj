@@ -23,17 +23,17 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "HomeServlet", urlPatterns = {"/"})
 public class HomeServlet extends HttpServlet {
 
-    
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-                request.setAttribute("rencontres", new MatcheDao().lister());
-            } catch (SQLException ex) {
-                Logger.getLogger(AdminRencontre.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(AdminRencontre.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            request.setAttribute("rencontres", new MatcheDao().lister());
+        } catch (SQLException ex) {
+            request.setAttribute("error", ex);
+        } catch (ClassNotFoundException ex) {
+            request.setAttribute("error", ex);
+
+        }
         request.getRequestDispatcher("/index.jsp").forward(request, response);
     }
 

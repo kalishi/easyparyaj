@@ -146,7 +146,7 @@ public class PariageDao implements IServices<PariageModel> {
         public int update(String etat, String id) throws SQLException, ClassNotFoundException {
      
         //To change body of generated methods, choose Tools | Templates.
-        Req = "update parriage set etat=? where id=?";
+        Req = "update parriage set etat=? where Code_P=?";
         con = DBUtils.connect();
         prepar = con.prepareStatement(Req);
         prepar.setString(1, etat);

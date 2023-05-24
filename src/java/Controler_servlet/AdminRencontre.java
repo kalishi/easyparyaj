@@ -76,7 +76,8 @@ public class AdminRencontre extends HttpServlet {
 
             } catch (Exception e) {
                 request.setAttribute("matcheError", e);
-                request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
+//                request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
+                doGet(request, response); 
                 return;
             }
 

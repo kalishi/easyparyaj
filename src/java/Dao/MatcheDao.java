@@ -46,6 +46,7 @@ public class MatcheDao implements IServices<Matche> {
              matche = new Matche(type, pays, date, equipeR, equipeV, heure, cote, scoreFinal, etat);
             matche.setId(id);
         }
+        DBUtils.close(rst, prepar, con);
         return  matche;
         
     }

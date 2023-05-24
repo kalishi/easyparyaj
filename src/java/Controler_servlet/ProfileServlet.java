@@ -4,9 +4,13 @@
  */
 package Controler_servlet;
 
+import Dao.PariageDao;
+import Model.PariageModel;
 import Model.User;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,8 +28,17 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-       
+       PariageDao pDao = new PariageDao();
+        User user = (User) request.getSession().getAttribute("user");
         if(LoginServlet.checkLogin(request, response)){
+            try {
+                ArrayList<PariageModel> data = pDao.listeParieUser(user.getCode());
+                request.setAttribute("pariages", data);
+            } catch (ClassNotFoundException e) {
+                request.setAttribute("error", e.getStackTrace());
+            } catch (SQLException e) {
+                request.setAttribute("error", e.getStackTrace());
+            }
         request.getRequestDispatcher("/compte/profile.jsp").forward(request, response);
         }
     }

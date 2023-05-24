@@ -3,7 +3,10 @@
     Created on : May 17, 2023, 9:03:43 PM
     Author     : DTelcy
 --%>
-<%@page import="Model.Matche"%>
+<%@page import="Dao.PariageDao"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Model.PariageModel"%>
+<%@page import="Dao.PaiementDao"%>
 <%@page import="Model.Matche"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="Model.User"%>
@@ -38,10 +41,54 @@
             </div>
         </div>
     </div>
-    
-    <div class="content">
         <h2>welcome back <%=u.getUsername()%></h2>
         
+        <h1>Mes Pariaes</h1>
+        
+         <table border="3" cellspacing="3" cellpadding="3">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>id Rencontre</th>
+                    <th>Date pariage</th>
+                    <th>Score prevu</th>
+                    <th>Montant mise</th>  
+                    <th>cote fiche</th> 
+                    <th>Solde fiche</th>
+                    <th>Etat</th>
+                </tr>
+            </thead>
+            <tbody>
+                
+                    <%
+                       ArrayList<PariageModel> prm =(ArrayList<PariageModel>)request.getAttribute("pariages");
+                       if(prm != null && !prm.isEmpty()){
+                          for(PariageModel p: prm){
+                    %>
+                    <tr>
+                    <td><%= p.getCode_Pariage()%></td>
+                    <td><%= p.getId_R()%></td>
+                    <td><%= p.getDate_Pariage()%></td>
+                    <td><%= p.getScrore_pevu()%></td>
+                    <td><%= p.getMontant_mise()%></td>      
+                    <td><%= p.getCoteMatch()%></td>  
+                    <td><%= p.getSolde_fiche()%></td>  
+                    <td><%= p.getEtat()%></td>    
+  
+                    </tr>                
+                    <% }
+                        } 
+                        else{
+                             %>
+                        <h5>No Pariage recorded</h5>
+                        <% 
+                        }
+                    %>
+                    
+                
+            </tbody>
+        </table>
+        <%--
         <table>
             <thead>
                 <tr>
@@ -90,7 +137,7 @@
                     
                 
             </tbody>
-        </table>
+        </table>--%>
     </div>
     <script src="static/carousel.js"></script>
     </body>

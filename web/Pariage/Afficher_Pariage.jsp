@@ -21,8 +21,9 @@
                     <th>Date pariage</th>
                     <th>Score prevu</th>
                     <th>Montant mise</th>  
-                    <th>cote fiche</th>    
+                    <th>cote fiche</th> 
                     <th>Solde fiche</th>
+                    <th>Etat</th>
                 </tr>
             </thead>
             <tbody>
@@ -39,7 +40,9 @@
                     <td><%= p.getScrore_pevu()%></td>
                     <td><%= p.getMontant_mise()%></td>      
                     <td><%= p.getCoteMatch()%></td>  
-                    <td><%= p.getSolde_fiche()%></td>    
+                    <td><%= p.getSolde_fiche()%></td>  
+                    <td><%= p.getEtat()%></td>    
+  
                     </tr>                
                     <% }
                         } 

@@ -4,6 +4,7 @@
     Author     : DTelcy
 --%>
 
+<%@page import="Dao.MatcheDao"%>
 <%@page import="Model.Matche"%>
 <%@page import="Model.Matche"%>
 <%@page import="java.util.ArrayList"%>
@@ -65,7 +66,7 @@
             <tbody>
                 
                     <%
-                       ArrayList<Matche> matches = ( ArrayList<Matche>)request.getAttribute("rencontres");
+                       ArrayList<Matche> matches = new MatcheDao().lister();
                        if(matches != null && !matches.isEmpty()){
                           for(Matche m: matches){
                     %>
@@ -78,8 +79,7 @@
                     <td><%= m.getEquipeR()%></td>  
                     <td><%= m.getEquipeV()%></td>      
                     <td><%= m.getCote()%></td>       
-                    <td><%= m.getScoreFinal()%></td>       
-                    <td><a href="users/edit?id=<%= m.getId()%>">Edit</a></td>
+                    <td><%= m.getScoreFinal()%></td>
                     </tr>                
                     <% }
                         } 
