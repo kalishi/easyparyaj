@@ -16,7 +16,7 @@
                 <%--<%@include file="header.jsp" %>--%>
 
         <h1>Matche Management</h1>
-         <form method="post" action="${pageContext.request.contextPath}/Matches">
+         <form method="post" action="${pageContext.request.contextPath}/admin/matches">
         <div>
             <label for="type" >Type Match</label>
             <div class="col-sm-10">
@@ -85,6 +85,7 @@
                     <th>Equipre Visiteuse</th>
                     <th>Cote</th>         
                     <th>Score Final</th>
+                    <th>Action</th>
 
                     
                 </tr>
@@ -106,7 +107,7 @@
                     <td><%= m.getEquipeV()%></td>      
                     <td><%= m.getCote()%></td>       
                     <td><%= m.getScoreFinal()%></td>       
-                    <td><a href="matches/edit?id=<%= m.getId()%>">Edit</a></td>
+                    <td><a href="<%=request.getContextPath()%>/admin/matches/edit?id=<%= m.getId()%>">Edit</a></td>
                     </tr>                
                     <% }
                         } 

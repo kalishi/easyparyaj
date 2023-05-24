@@ -11,17 +11,17 @@
         <link rel="stylesheet" href="<%=request.getContextPath()%>/static/main.css"/>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Admin</title>
-        <script src="../static/jquery-3.6.4.min.js"></script>
+        <script src="<%=request.getContextPath()%>/static/jquery-3.6.4.min.js"></script>
         <script>
             $(function () {
                 $("#user").load("<%=request.getContextPath()%>/admin/users");
-                $("#rencontre").load("<%=request.getContextPath()%>admin/matches");
+                $("#rencontre").load("<%=request.getContextPath()%>/admin/matches");
                 $("#parriage").load("<%=request.getContextPath()%>/admin/pariages");
             });
         </script>
     </head>
     <body>
-        <script src="../static/jquery-3.6.4.min.js"></script>
+        <script src="<%=request.getContextPath()%>/static/jquery-3.6.4.min.js"></script>
         <div class="container">
             <nav class="sidebar">
                 <div class="menu-bar">
@@ -71,7 +71,7 @@
             </div>
         </section>
 
-        <script src="../static/sidebar.js"></script>
+        <script src="<%=request.getContextPath()%>/static/sidebar.js"></script>
 
         <script>
             $(document).ready(function () {

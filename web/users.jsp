@@ -7,16 +7,6 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="Model.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Admin - users</title>
-        <link rel="stylesheet" href="static/users.css" />
-    </head>
-    <body>
-        
-            <%--<%@include file="/header.jsp" %>--%>
             <div class="content">
         <h1>User list</h1>
         
@@ -50,7 +40,7 @@
                     <td><%= u.getEtat()%></td>
                     <td><%= u.getSolde()%></td>  
                     <td><%= u.isAdmin()%></td>       
-                    <td><a href="users/edit?id=<%= u.getCode()%>">Edit</a></td>
+                    <td><a href="<%=request.getContextPath()%>/admin/users/edit?id=<%= u.getCode()%>">Edit</a></td>
 
 
                     
@@ -67,6 +57,3 @@
                 
             </tbody>
         </table>
-            </div>
-    </body>
-</html>
