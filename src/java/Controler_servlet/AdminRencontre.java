@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.sql.Time;
 import java.sql.Date;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -46,35 +47,57 @@ public class AdminRencontre extends HttpServlet {
             throws ServletException, IOException {
         if (AdminServlet.checkAdmin(request, response)) {
             System.out.println("Methode post cree rencontre");
+            Matche model = new Matche();
+            MatcheDao dao = new MatcheDao();
 //            recuper les champ et apple la methode Enregistrer de rencontre dao
-            String type = request.getParameter("type");
-            String pays = request.getParameter("pays");
-            if (!Matche.isValidScoreFormat("score")) {
-                request.setAttribute("rencontreError", "Score invalide");
+            try {
+                String dateMatchString = request.getParameter("dateMatch");
+                String heureMatchString = request.getParameter("heureMatch");
+
+// Parse the date and time strings into LocalDate and LocalTime objects
+                LocalDate dateMatch = LocalDate.parse(dateMatchString);
+                LocalTime heureMatch = LocalTime.parse(heureMatchString);
+
+                String type = request.getParameter("type");
+                String pays = request.getParameter("pays");
+                Float cote = Float.valueOf(request.getParameter("cote"));
+                model.setType(type);
+                model.setPays(pays);
+                model.setEquipeR(request.getParameter("equipeR"));
+                model.setEquipeV(request.getParameter("equipeV"));
+                model.setCote(cote);
+                model.setScoreFinal(request.getParameter("score"));
+                model.setEtat("N");
+//                model.setDate(Date.valueOf(request.getParameter("dateMatch")));
+//                model.setHeure(Time.valueOf(request.getParameter("heureMatch")));
+// Set the date and time values in the Paiement object
+                model.setDate(Date.valueOf(dateMatch));
+                model.setHeure(Time.valueOf(heureMatch));
+
+            } catch (Exception e) {
+                request.setAttribute("matcheError", e);
                 request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
                 return;
             }
-            Float cote = Float.valueOf(request.getParameter("cote"));
-            Matche model = new Matche();
-            model.setType(type);
-            model.setPays(pays);
-            model.setDate(Date.valueOf(request.getParameter("dateMatch")));
-            model.setHeure(Time.valueOf(request.getParameter("heureMatch")));
-            model.setEquipeR(request.getParameter("equipeR"));
-            model.setEquipeV(request.getParameter("equipeV"));
-            model.setCote(cote);
-            model.setScoreFinal(request.getParameter("score"));
-            model.setEtat("N");
-            MatcheDao dao = new MatcheDao();
-            System.out.println("saving the model");
+
+            if (!Matche.isValidScoreFormat(request.getParameter("score"))) {
+                request.setAttribute("matcheError", "Score invalide");
+                request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
+                return;
+            }
+
             try {
                 dao.enregistrer(model);
             } catch (SQLException ex) {
                 request.setAttribute("matcheError", ex.getMessage());
-                response.sendRedirect(request.getContextPath() + "/admin");
+//                response.sendRedirect(request.getContextPath() + "/admin");
+                request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
+
             } catch (ClassNotFoundException ex) {
                 request.setAttribute("matcheError", ex.getMessage());
-                response.sendRedirect(request.getContextPath() + "/admin");
+//                response.sendRedirect(request.getContextPath() + "/admin");
+                request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
+
 
             }
 
