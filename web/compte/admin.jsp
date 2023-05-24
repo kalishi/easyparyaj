@@ -14,9 +14,9 @@
         <script src="../static/jquery-3.6.4.min.js"></script>
         <script>
             $(function () {
-                $("#user").load("../admin/users");
-                $("#rencontre").load("admin/match");
-                $("#parriage").load("/admin/pariages");
+                $("#user").load("<%=request.getContextPath()%>/admin/users");
+                $("#rencontre").load("<%=request.getContextPath()%>admin/matches");
+                $("#parriage").load("<%=request.getContextPath()%>/admin/pariages");
             });
         </script>
     </head>

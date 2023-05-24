@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package Controler_servlet;
+
 import Dao.MatcheDao;
 import Model.Matche;
 import java.io.IOException;
@@ -50,6 +51,11 @@ public class AdminRencontre extends HttpServlet {
 
             String type = request.getParameter("type");
             String pays = request.getParameter("pays");
+            if (!Matche.isValidScoreFormat("score")) {
+                request.setAttribute("rencontreError", "Score invalide");
+                request.getRequestDispatcher("/adminRencontres.jsp").forward(request, response);
+                return;
+            }
             Date date = Date.valueOf(request.getParameter("date"));
             Float cote = Float.parseFloat(request.getParameter("cote"));
             Matche model = new Matche();
