@@ -5,6 +5,7 @@
 package Controler_servlet;
 
 import Dao.PaiementDao;
+import Dao.UserDao;
 import Model.PaiementModel;
 import Model.User;
 import com.mysql.cj.Session;
@@ -70,6 +71,8 @@ public class Paiement_servlet extends HttpServlet {
             PaiementDao DaoPaie= new PaiementDao();
             try {
                 DaoPaie.enregistrer(modelPaie);
+                UserDao usedao=new UserDao();
+                usedao.update(user.getCode(), user.getSolde()+Montant, user.getEtat());
             } catch (SQLException ex) {
                 Logger.getLogger(Paiement_servlet.class.getName()).log(Level.SEVERE, null, ex);
             } catch (ClassNotFoundException ex) {
